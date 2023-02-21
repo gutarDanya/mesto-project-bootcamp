@@ -1,0 +1,15 @@
+.profile__title {
+    color: white;
+    margin: auto 18px 0 0;
+    font-size:42px;
+    line-height: 1.14;
+    font-weight: 500;
+}
+
+@media (max-width:830px) {
+    .profile__title{
+        font-size: 27px;
+        line-height: 33px;
+        align-self: flex-start ;
+    }
+}

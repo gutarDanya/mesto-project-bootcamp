@@ -1,0 +1,9 @@
+.element__like {
+    margin: auto 15px auto auto;
+    color:black;
+    font-size: 30px;
+}
+
+.element__like:hover {
+    opacity: 0.6;
+}

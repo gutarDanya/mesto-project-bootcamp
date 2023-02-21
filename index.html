@@ -1,12 +1,107 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="pages/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Место</title>
+    <meta name="author" content="Даниил Ушаков">
 </head>
-<body>
-    
+
+<body class="root"><!--ЗДЕСЬ НАЧИНАЕТСЯ СТРАНИЦА-->
+    <!--EDIT FORM-->
+    <section class="edit-form">
+        <div class="form">
+            <p class="form__close-button">+</p>
+            <h3 class="form__title">Редактировать профиль</h3>
+            <input type="text" name="name" placeholder="Жак-Ив Кусто" class="form__name">
+            <input type="text" name="bio" placeholder="Исследователь океана" class="form__bio">
+            <button class="form__save-button">Сохранить</button>
+        </div>
+    </section>
+    <div class="page">
+        <header class="header"> <!--HEADER-->
+            <img src="./images/header__logo.png" class="header__logo">
+        </header>
+        <main class="content"><!--ЗДЕСЬ НАЧИНАЕТСЯ КОНТЕНТ-->
+
+            <section class="profile"><!--PROFILE-->
+                <div class="profile__bio">
+
+                    <div class=" profile__avatar">
+                        <img src='./images/avatar.jpg' class="profile__image">
+                    </div>
+
+                    <div class="profile__info">
+                            <h1 class="profile__title">Жак-Ив Кусто
+                            <button class="profile__edit-button">✎</button>
+                        </h1>
+                        <p class=profile__text>Исследователь океана</p>
+                    </div>
+                </div>
+
+                <button class="profile__add-button">+</button>
+
+            </section>
+
+            <section class="elements"><!--ELEMTNTS-->
+
+                <div class="element">
+                    <img src='./images/новороссийск.jpg' alt="новороссийск" class="element__image">
+                    <div class="element__info">
+                        <h2 class="element__place">Новороссийск</h2>
+                        <p class="element__like">&#x2661</p>
+                    </div>
+                </div>
+
+                <div class="element">
+                    <img src='./images/гора эльбрус далеко.png' alt="гора эльбрус" class="element__image">
+                    <div class="element__info">
+                        <h2 class="element__place">Гора Эльбрус</h2>
+                        <p class="element__like">&#x2661</p>
+                    </div>
+                </div>
+
+                <div class="element">
+                    <img src='./images/Домбай.png' alt="Домбай" class="element__image">
+                    <div class="element__info">
+                        <h2 class="element__place">Домбай</h2>
+                        <p class="element__like">&#x2661</p>
+                    </div>
+                </div>
+
+                <div class="element">
+                    <img src='./images/гора эльбрус далеко.png' alt="Гора Эльбрус" class="element__image">
+                    <div class="element__info">
+                        <h2 class="element__place">Гора Эльбрус</h2>
+                        <p class="element__like">&#x2661</p>
+                    </div>
+                </div>
+
+                <div class="element">
+                    <img src='./images/Домбай.png' alt="Домбай" class="element__image">
+                    <div class="element__info">
+                        <h2 class="element__place">Домбай</h2>
+                        <p class="element__like">&#x2661</p>
+                    </div>
+                </div>
+
+                <div class="element">
+                    <img src='./images/карачаевск.jpg' alt="Карасаево-Черкаск" class="element__image">
+                    <div class="element__info">
+                        <h2 class="element__place">Карасаево-Черкаск</h2>
+                        <p class="element__like">&#x2661</p>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+        <footer class="footer"><!--FOOTER-->
+            <h3 class="footer__info">© 2022 Mesto Russia</h3>
+        </footer>
+    </div>
 </body>
+
 </html>

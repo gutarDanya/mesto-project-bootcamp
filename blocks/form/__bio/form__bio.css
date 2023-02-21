@@ -1,0 +1,12 @@
+.form__bio {
+    margin: 30px auto 0;
+    border:0;
+    border-bottom: 1px solid rgba(0,0,0,0.3);
+    width:358px;
+}
+
+@media (max-width:520px) {
+    .form__bio {
+        width: 238px;
+    }
+}

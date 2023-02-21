@@ -1,0 +1,23 @@
+.form__close-button {
+    position:absolute;
+    right: -40px;
+    top: -60px;
+    font-weight: 400;
+    font-size:70px;
+    margin:0;
+    color:white;
+    transform: rotate(45deg) ;
+}
+
+.form__close-button:hover {
+    opacity:0.6;
+    cursor: pointer;
+}
+
+@media (max-width:520px) {
+    .form__close-button {
+        right:0;
+        font-size:40px;
+        top: -40px;
+    }
+}
