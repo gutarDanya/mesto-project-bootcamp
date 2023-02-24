@@ -7,6 +7,8 @@
     border: solid 1px white;
     color:white;
     font-size:15px;
+    background-image: url(../../../images/Vector.svg);
+    background-size: 80%;
 }
 
 .profile__edit-button:hover {

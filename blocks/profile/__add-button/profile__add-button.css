@@ -4,8 +4,8 @@
     margin: auto 0;
     background-color:  black;
     color: white;
-    border:solid 1px white;
-    border-radius: 5%;
+    border: 2%;
+    border:solid 2px white;
     font-size:35px;
     font-weight: 300;
 }

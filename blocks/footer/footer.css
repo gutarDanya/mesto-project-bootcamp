@@ -5,6 +5,6 @@
 @media (max-width:480px) {
     .footer {
         margin:48px auto 36px;
-        width:282px;
+        max-width:282px;
     }
 }

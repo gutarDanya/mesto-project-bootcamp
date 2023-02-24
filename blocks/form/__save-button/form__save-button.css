@@ -9,6 +9,10 @@
     background-color: black;
 }
 
+.form__save-button:hover {
+    cursor: pointer;
+}
+
 @media (max-width:520px) {
     .form__save-button {
         font-size:14px;

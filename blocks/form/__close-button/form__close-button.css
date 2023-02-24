@@ -1,12 +1,11 @@
 .form__close-button {
-    position:absolute;
-    right: -40px;
-    top: -60px;
     font-weight: 400;
     font-size:70px;
-    margin:0;
+    margin:auto -45px -15px auto;
     color:white;
-    transform: rotate(45deg) ;
+    transform: rotate(45deg);
+    border: 0;
+    background-color: transparent;
 }
 
 .form__close-button:hover {

@@ -1,6 +1,6 @@
 .element {
-    height:362px;
-    width:282px;
+    min-height:362px;
+    width:100%;
     border-radius:5%;
     overflow: hidden;
     position: relative;
