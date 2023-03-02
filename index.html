@@ -12,18 +12,41 @@
 
 <body class="root"><!--ЗДЕСЬ НАЧИНАЕТСЯ СТРАНИЦА-->
     <!--EDIT FORM-->
-    <section class="edit-form">
+    <section class="modal-window modal-window_place_edit-form">
         <div class="form-container">
             <button type="button" class="form__close-button">+</button>
-            <form name='edit-form' class="form">
+            <form action="#" name='edit-form' class="form">
                 <h3 class="form__title">Редактировать профиль</h3>
-                <input type="text" name="name" placeholder="Жак-Ив Кусто" class="form__input form__input_type_name">
-                <input type="text" name="bio" placeholder="Исследователь океана"
-                    class="form__input form__input_type_bio">
+                <input type="text" name="name" placeholder="Как вас зовут" class="form__input form__input_type_name">
+                <input type="text" name="bio" placeholder="Расскажите о себе" class="form__input form__input_type_bio">
                 <button type='submit' class="form__save-button">Сохранить</button>
             </form>
         </div>
     </section>
+
+    <section class="modal-window modal-window_place_add-form">
+        <div class="form-container">
+            <button type="button" class="form__close-button">+</button>
+            <form action="#" name='add-place-form' class="form">
+                <h3 class="form__title form__title_text_left">Новое место</h3>
+                <input type="text" name="name" placeholder="О посте" class="form__input form__input_type_place">
+                <input type="url" name="bio" placeholder="ссылка на изображение"
+                    class="form__input form__input_type_image-url">
+                <button type='submit' class="form__save-button">Создать</button>
+            </form>
+        </div>
+    </section>
+
+    <section class="modal-window modal-window_place_image">
+        <div class="image-popup">
+            <button type="button" class="form__close-button form__close-button_place_image-popup">+</button>
+            <figure class="image-popup__figure">
+                <img src="./images/гора эльбрус.png" class="image-popup__image" alt="place">
+                <figcaption class="image-popup__text">гора</figcaption>
+            </figure>
+        </div>
+    </section>
+
     <div class="page">
         <header class="header"> <!--HEADER-->
             <img src="./images/logo.svg" class="header__logo">
@@ -36,10 +59,11 @@
                     <img src='./images/avatar.jpg' class="profile__avatar">
 
                     <div class="profile__info">
-                        <h1 class="profile__title">Жак-Ив Кусто
+                        <div class="profile__name_container">
+                            <h1 class="profile__title">Жак-Ив Кусто</h1>
                             <button type="button" class="profile__edit-button"></button>
-                        </h1>
-                        <p class=profile__text>Исследователь океана</p>
+                        </div>
+                        <p class='profile__text'>Исследователь океана</p>
                     </div>
                 </div>
 
@@ -49,53 +73,6 @@
 
             <section class="elements"><!--ELEMTNTS-->
 
-                <div class="element">
-                    <img src='./images/новороссийск.jpg' alt="новороссийск" class="element__image">
-                    <div class="element__info">
-                        <h2 class="element__place">Новороссийск</h2>
-                        <button type="button" class="element__like"></button>
-                    </div>
-                </div>
-
-                <div class="element">
-                    <img src='./images/гора эльбрус далеко.png' alt="гора эльбрус" class="element__image">
-                    <div class="element__info">
-                        <h2 class="element__place">Гора Эльбрус</h2>
-                        <button type="button" class="element__like"></button>
-                    </div>
-                </div>
-
-                <div class="element">
-                    <img src='./images/Домбай.png' alt="Домбай" class="element__image">
-                    <div class="element__info">
-                        <h2 class="element__place">Домбай</h2>
-                        <button type="button" class="element__like"></button>
-                    </div>
-                </div>
-
-                <div class="element">
-                    <img src='./images/гора эльбрус далеко.png' alt="Гора Эльбрус" class="element__image">
-                    <div class="element__info">
-                        <h2 class="element__place">Гора Эльбрус</h2>
-                        <button type="button" class="element__like"></button>
-                    </div>
-                </div>
-
-                <div class="element">
-                    <img src='./images/Домбай.png' alt="Домбай" class="element__image">
-                    <div class="element__info">
-                        <h2 class="element__place">Домбай</h2>
-                        <button type="button" class="element__like"></button>
-                    </div>
-                </div>
-
-                <div class="element">
-                    <img src='./images/карачаевск.jpg' alt="Карасаево-Черкаск" class="element__image">
-                    <div class="element__info">
-                        <h2 class="element__place">Карасаево-Черкаск</h2>
-                        <button type="button" class="element__like"></button>
-                    </div>
-                </div>
             </section>
 
         </main>

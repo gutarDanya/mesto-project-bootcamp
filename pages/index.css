@@ -19,22 +19,30 @@
 @import url(../blocks/profile/__info/profile__info.css);
 @import url(../blocks/profile/__title/profile__title.css);
 @import url(../blocks/profile/__edit-button/profile__edit-button.css);
+@import url(../blocks/profile/__name-container/profile__name-container.css);
 @import url(../blocks/profile/__text/profile__text.css);
 @import url(../blocks/profile/__add-button/profile__add-button.css);
 
 /*EDIT-FORM*/
-@import url(../blocks/edit-form/edit-form.css);
-@import url(../blocks/edit-form/_active/edit-form_active.css);
+@import url(../blocks/modal-window/modal-window.css);
+@import url(../blocks/modal-window/_active/modal_window_active.css);
 
 /*FORM*/
 @import url(../blocks/form/form.css);
 @import url(../blocks/form-comtainer/form-container.css);
 @import url(../blocks/form/__close-button/form__close-button.css);
 @import url(../blocks/form/__title/form__title.css);
+@import url(../blocks/form/__title/_text/form__title_text_left.css);
 @import url(../blocks/form/__input/form__input.css);
 @import url(../blocks/form/__input/_type/form__input_type_name);
 @import url(../blocks/form/__input/_type/form__input_type_bio);
 @import url(../blocks/form/__save-button/form__save-button.css);
+
+/*IMAGE-FORM*/
+@import url(../blocks/image-popup/image-popup.css);
+@import url(../blocks/image-popup/__image/image-popup__image.css);
+@import url(../blocks/image-popup/__figure/image-popup__figure.css);
+@import url(../blocks/image-popup/__text/image-popup__text.css);
 
 /*ELEMENTS*/
 @import url(../blocks/elements/elements.css);
@@ -42,9 +50,12 @@
 /*ELEMENT*/
 @import url(../blocks/element/element.css);
 @import url(../blocks/element/__image/element__image.css);
+@import url(../blocks/element/__image/_active/element__image_active.css);
 @import url(../blocks/element/__info/element__info.css);
 @import url(../blocks/element/__place/element__place.css);
 @import url(../blocks/element/__like/element__like.css);
+@import url(../blocks/element/__delete-place/element__delete-place.css);
+@import url(../blocks/element/__like/_active/element__like_active.css);
 
 /*FOOTER*/
 @import url(../blocks/footer/footer.css);

@@ -1,7 +1,7 @@
 .form__close-button {
     font-weight: 400;
     font-size:70px;
-    margin:auto -45px -15px auto;
+    margin:auto -40px auto auto;
     color:white;
     transform: rotate(45deg);
     border: 0;
