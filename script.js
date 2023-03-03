@@ -26,6 +26,8 @@ const inputBioOfUser = modalEditProfile.querySelector('.form__input_type_bio');
 const inputPostInfo = modalAddPlace.querySelector('.form__input_type_place');
 const inputPostImage = modalAddPlace.querySelector('.form__input_type_image-url');
 
+//TEMPLATE
+
 //ЭЛЕМЕНТЫ ЭДИТ ФОРМЫ
 let nameOfUser = document.querySelector('.profile__title');
 let bioOfUser = document.querySelector('.profile__text');
@@ -67,41 +69,25 @@ function closePopup (nameOfPopup) {
 function submitAddForm (e) {
     e.preventDefault();
 
-    const placeContainer = document.createElement('div');
-    placeContainer.classList.add('element');
-
-    const trash = document.createElement('button');
-    trash.classList.add('element__delete-place');
-    trash.setAttribute('type','button');
+    const TemplatePlaceContainer = document.querySelector('#post-template').content;
+    const placeContainer = TemplatePlaceContainer.querySelector('.element').cloneNode(true);
+    const nameOfPlace = placeContainer.querySelector('.element__place');
+    const imageElement = placeContainer.querySelector('.element__image');
+    const trash = placeContainer.querySelector('.element__delete-place');
+    const buttonLikePlace = placeContainer.querySelector('.element__like');
 
     trash.addEventListener('click', function (evt) {
         const elementToDelete = trash.closest('.element');
         elementToDelete.remove();
     })
 
-    const infoContainer = document.createElement('div');
-    infoContainer.classList.add('element__info');
-
-    const nameOfPlace = document.createElement('h2');
-    nameOfPlace.classList.add('element__place');
     nameOfPlace.textContent = inputPostInfo.value;
-
-    const buttonLikePlace = document.createElement('button');
-    buttonLikePlace.classList.add('element__like');
-    buttonLikePlace.setAttribute('type', 'button');
 
     buttonLikePlace.addEventListener('click', function (evt) {
         evt.target.classList.toggle('element__like_active');
     });
     
-    infoContainer.append(nameOfPlace, buttonLikePlace);
-
-    const imageElement = document.createElement('img');
     imageElement.src = inputPostImage.value;
-    imageElement.classList.add('element__image');
-
-
-    placeContainer.append(imageElement, trash, infoContainer);
 
     elementsSection.prepend(placeContainer);
 
@@ -111,6 +97,7 @@ function submitAddForm (e) {
         elementTextOfOpenModalWindow.textContent = nameOfPlace.textContent;
         openPopup(modalImageActive)
     });
+
     inputPostInfo.value = '';
     inputPostImage.value = '';
 };
@@ -134,42 +121,27 @@ buttonOpentAddForm.addEventListener('click', () => openPopup(modalAddPlace));
 buttonCloseAddForm.addEventListener('click', () => closePopup(modalAddPlace));
 
     for (let i = 0; i < initialCardList.length; i ++) {
-        const placeContainer = document.createElement('div');
-    placeContainer.classList.add('element');
-
-    const trash = document.createElement('button');
-    trash.classList.add('element__delete-place');
-    trash.setAttribute('type','button');
+        const TemplatePlaceContainer = document.querySelector('#post-template').content;
+        const placeContainer = TemplatePlaceContainer.querySelector('.element').cloneNode(true);
+        const nameOfPlace = placeContainer.querySelector('.element__place');
+        const imageElement = placeContainer.querySelector('.element__image');
+        const trash = placeContainer.querySelector('.element__delete-place');
+        const buttonLikePlace = placeContainer.querySelector('.element__like');
 
     trash.addEventListener('click', function (evt) {
         const elementToDelete = trash.closest('.element');
         elementToDelete.remove();
     });
 
-    const infoContainer = document.createElement('div');
-    infoContainer.classList.add('element__info');
-
-    const nameOfPlace = document.createElement('h2');
-    nameOfPlace.classList.add('element__place');
     nameOfPlace.textContent = initialCardList[i].name;
-
-    const buttonLikePlace = document.createElement('button');
-    buttonLikePlace.classList.add('element__like');
-    buttonLikePlace.setAttribute('type', 'button');
 
     buttonLikePlace.addEventListener('click', function (evt) {
         evt.target.classList.toggle('element__like_active');
     });
-    
-    infoContainer.append(nameOfPlace, buttonLikePlace);
 
-    const imageElement = document.createElement('img');
     imageElement.src = initialCardList[i].link;
-    imageElement.classList.add('element__image');
 
     buttonCloseImageActive.addEventListener('click', () => closePopup(modalImageActive));
-
-    placeContainer.append(imageElement, trash, infoContainer);
 
     elementsSection.prepend(placeContainer);
 
