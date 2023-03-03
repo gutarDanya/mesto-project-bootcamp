@@ -111,6 +111,8 @@ function submitAddForm (e) {
         elementTextOfOpenModalWindow.textContent = nameOfPlace.textContent;
         openPopup(modalImageActive)
     });
+    inputPostInfo.value = '';
+    inputPostImage.value = '';
 };
 
 //ИЗМЕНЕНИЕ ПРОФИЛЯ
@@ -118,6 +120,8 @@ function submitEditForm(e) {
     e.preventDefault();
     nameOfUser.textContent = inputNameOfUser.value;
     bioOfUser.textContent = inputBioOfUser.value;
+    inputBioOfUser.value = '';
+    inputNameOfUser.value = '';
 }
 
 buttonOpenEditForm.addEventListener('click', () => openPopup(modalEditProfile));
