@@ -36,7 +36,9 @@
 @import url(../blocks/form/__input/form__input.css);
 @import url(../blocks/form/__input/_type/form__input_type_name);
 @import url(../blocks/form/__input/_type/form__input_type_bio);
+@import url(../blocks/form/__input/_type/form__input_type_error.css);
 @import url(../blocks/form/__save-button/form__save-button.css);
+@import url(../blocks/form/__save-button/form__save-button_disabled.css);
 
 /*IMAGE-FORM*/
 @import url(../blocks/image-popup/image-popup.css);
@@ -60,3 +62,5 @@
 /*FOOTER*/
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__info/footer__info.css);
+
+@import url(../blocks/error-massage/error-massage.css);

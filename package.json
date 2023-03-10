@@ -1,0 +1,11 @@
+{
+  "name": "mesto-project-bootcamp",
+  "version": "1.0.0",
+  "description": "* Создать логику по средству js.\r * сделать сайт более адаптивным на разных разрешениях",
+  "main": "index.js",
+  "scripts": {
+    "test": "console.log(pivo)\u001b[D'\u001b[D\u001b[D\u001b[D\u001b[D\u001b[C\u001b[C\u001b'pivo')"
+  },
+  "author": "",
+  "license": "ISC"
+}

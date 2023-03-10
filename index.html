@@ -17,9 +17,13 @@
             <button type="button" class="form__close-button">+</button>
             <form action="#" name='edit-form' class="form">
                 <h3 class="form__title">Редактировать профиль</h3>
-                <input type="text" name="name" placeholder="Как вас зовут" class="form__input form__input_type_name">
-                <input type="text" name="bio" placeholder="Расскажите о себе" class="form__input form__input_type_bio">
-                <button type='submit' class="form__save-button">Сохранить</button>
+                <input type="text" name="name" placeholder="Как вас зовут" class="form__input form__input_type_name "
+                    required>
+                <span name="error-name" class="error-massage"></span>
+                <input type="text" name="bio" placeholder="Расскажите о себе" class="form__input form__input_type_bio"
+                    required>
+                <span name="error-bio" class="error-massage"></span>
+                <button type='submit' class="form__save-button form__save-button_disabled">Сохранить</button>
             </form>
         </div>
     </section>
@@ -29,9 +33,12 @@
             <button type="button" class="form__close-button">+</button>
             <form action="#" name='add-place-form' class="form">
                 <h3 class="form__title form__title_text_left">Новое место</h3>
-                <input type="text" name="name" placeholder="О посте" class="form__input form__input_type_place">
-                <input type="url" name="bio" placeholder="ссылка на изображение"
-                    class="form__input form__input_type_image-url">
+                <input type="text" name="info" placeholder="О посте" class="form__input form__input_type_place"
+                    required>
+                <span name="error-info" class="error-massage"></span>
+                <input type="url" name="image" placeholder="ссылка на изображение"
+                    class="form__input form__input_type_image-url" required>
+                <span name="error-image" class="error-massage"></span>
                 <button type='submit' class="form__save-button">Создать</button>
             </form>
         </div>
@@ -90,7 +97,8 @@
             </div>
         </div>
     </template>
-    <script src="./script.js"></script>
+    <script type="module" src="./script.js"></script>
+    <script type="'module" src="./data.js"></script>
 </body>
 
 </html>

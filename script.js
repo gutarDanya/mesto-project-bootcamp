@@ -29,48 +29,23 @@ const inputPostImage = modalAddPlace.querySelector('.form__input_type_image-url'
 //TEMPLATE
 
 //ЭЛЕМЕНТЫ ЭДИТ ФОРМЫ
-let nameOfUser = document.querySelector('.profile__title');
-let bioOfUser = document.querySelector('.profile__text');
-const initialCardList = [{
-    name: 'Новороссийск',
-    link: 'https://clck.ru/33erea'
-},
-{
-    name: 'Долина Йосемити',
-    link: 'https://clck.ru/33erhw',
-},
-{
-    name: 'Большая голубая дыра',
-    link: 'https://www.tripzaza.com/ru/destinations/wp-content/uploads/2018/06/31-Great_Blue_Hole-e1528959819181.jpg',
-},
-{
-    name: 'Салар де Юни',
-    link: 'https://www.tripzaza.com/ru/destinations/wp-content/uploads/2018/06/5-Salar_de_Uyuni-e1528946029666.jpg',
-},
-{
-    name: 'прованс',
-    link: 'https://www.tripzaza.com/ru/destinations/wp-content/uploads/2018/06/27-Provence-e1528957059108.jpg',
-},
-{
-    name: 'Бухта Навагио',
-    link: 'https://www.tripzaza.com/ru/destinations/wp-content/uploads/2018/06/24-Navagio_Beach-e1528956679198.jpg',
-},
-]
+const nameOfUser = document.querySelector('.profile__title');
+const bioOfUser = document.querySelector('.profile__text');
 
-function openPopup (nameOfPopup) {
-    nameOfPopup.classList.add('modal-window_active');
+import { initialCardList } from './data.js'
+
+function openPopup (nameModalWindow) {
+    nameModalWindow.classList.add('modal-window_active');
 }
 
-function closePopup (nameOfPopup) {
-    nameOfPopup.classList.remove('modal-window_active');
+function closePopup (nameOfModalWindow) {
+    nameOfModalWindow.classList.remove('modal-window_active');
 }
 
-//колбек для формы создания карточки
-function submitAddForm (e) {
-    e.preventDefault();
+const createCard = (NamePlace, imageOfElement) => {
 
-    const TemplatePlaceContainer = document.querySelector('#post-template').content;
-    const placeContainer = TemplatePlaceContainer.querySelector('.element').cloneNode(true);
+    const templatePlaceContainer = document.querySelector('#post-template').content;
+    const placeContainer = templatePlaceContainer.querySelector('.element').cloneNode(true);
     const nameOfPlace = placeContainer.querySelector('.element__place');
     const imageElement = placeContainer.querySelector('.element__image');
     const trash = placeContainer.querySelector('.element__delete-place');
@@ -81,13 +56,13 @@ function submitAddForm (e) {
         elementToDelete.remove();
     })
 
-    nameOfPlace.textContent = inputPostInfo.value;
+    nameOfPlace.textContent = NamePlace;
 
     buttonLikePlace.addEventListener('click', function (evt) {
         evt.target.classList.toggle('element__like_active');
     });
     
-    imageElement.src = inputPostImage.value;
+    imageElement.src = imageOfElement;
 
     elementsSection.prepend(placeContainer);
 
@@ -97,6 +72,12 @@ function submitAddForm (e) {
         elementTextOfOpenModalWindow.textContent = nameOfPlace.textContent;
         openPopup(modalImageActive)
     });
+}
+
+//колбек для формы создания карточки
+function submitAddForm (e) {
+    e.preventDefault();
+createCard(inputPostInfo.value, inputPostImage.value);
 
     inputPostInfo.value = '';
     inputPostImage.value = '';
@@ -121,35 +102,6 @@ buttonOpentAddForm.addEventListener('click', () => openPopup(modalAddPlace));
 buttonCloseAddForm.addEventListener('click', () => closePopup(modalAddPlace));
 
     for (let i = 0; i < initialCardList.length; i ++) {
-        const TemplatePlaceContainer = document.querySelector('#post-template').content;
-        const placeContainer = TemplatePlaceContainer.querySelector('.element').cloneNode(true);
-        const nameOfPlace = placeContainer.querySelector('.element__place');
-        const imageElement = placeContainer.querySelector('.element__image');
-        const trash = placeContainer.querySelector('.element__delete-place');
-        const buttonLikePlace = placeContainer.querySelector('.element__like');
-
-    trash.addEventListener('click', function (evt) {
-        const elementToDelete = trash.closest('.element');
-        elementToDelete.remove();
-    });
-
-    nameOfPlace.textContent = initialCardList[i].name;
-
-    buttonLikePlace.addEventListener('click', function (evt) {
-        evt.target.classList.toggle('element__like_active');
-    });
-
-    imageElement.src = initialCardList[i].link;
-
-    buttonCloseImageActive.addEventListener('click', () => closePopup(modalImageActive));
-
-    elementsSection.prepend(placeContainer);
-
-    imageElement.addEventListener('click', () => {
-        elementImageOfOpenModalWindow.src = imageElement.src;
-        elementImageOfOpenModalWindow.alt = nameOfPlace.textContent;
-        elementTextOfOpenModalWindow.textContent = nameOfPlace.textContent;
-        openPopup(modalImageActive)
-    });
+createCard(initialCardList[i].name, initialCardList[i].link)
     };
 
