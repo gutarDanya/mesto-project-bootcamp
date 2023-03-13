@@ -1,7 +1,4 @@
-//МОДАЛЬНЫЕ ОКНА
-const modalEditProfile = document.querySelector('.modal-window_place_edit-form');
-const modalAddPlace = document.querySelector('.modal-window_place_add-form');
-const modalImageActive = document.querySelector('.modal-window_place_image');
+import { modalWindowList, modalEditProfile, modalAddPlace, modalImageActive } from './modal.js';
 
 //ФОРМЫ
 const formEditProfile = modalEditProfile.querySelector('.form');
@@ -12,13 +9,6 @@ const elementsSection = document.querySelector('.elements');
 const elementImageOfOpenModalWindow = modalImageActive.querySelector('.image-popup__image');
 const elementTextOfOpenModalWindow = modalImageActive.querySelector('.image-popup__text');
 
-//КОНСТАНТЫ КНОПОК
-const buttonOpenEditForm = document.querySelector('.profile__edit-button');
-const buttonOpentAddForm = document.querySelector('.profile__add-button');
-const buttonCloseEditForm = modalEditProfile.querySelector('.form__close-button');
-const buttonCloseAddForm = modalAddPlace.querySelector('.form__close-button');
-const buttonCloseImageActive = modalImageActive.querySelector('.form__close-button');
-const buttonLikePost = elementsSection.querySelector('.element__like');
 
 //ИНПУТЫ
 const inputNameOfUser = modalEditProfile.querySelector('.form__input_type_name');
@@ -33,14 +23,10 @@ const nameOfUser = document.querySelector('.profile__title');
 const bioOfUser = document.querySelector('.profile__text');
 
 import { initialCardList } from './data.js'
+import { openPopup, closePopup, listenerOfModalWindowList } from './modal.js';
 
-function openPopup (nameModalWindow) {
-    nameModalWindow.classList.add('modal-window_active');
-}
+listenerOfModalWindowList();
 
-function closePopup (nameOfModalWindow) {
-    nameOfModalWindow.classList.remove('modal-window_active');
-}
 
 const createCard = (NamePlace, imageOfElement) => {
 
@@ -92,16 +78,24 @@ function submitEditForm(e) {
     inputNameOfUser.value = '';
 }
 
-buttonOpenEditForm.addEventListener('click', () => openPopup(modalEditProfile));
-buttonCloseEditForm.addEventListener('click', () => closePopup(modalEditProfile));
 
 formEditProfile.addEventListener('submit', submitEditForm);
 formAddPlace.addEventListener('submit', submitAddForm);
 
-buttonOpentAddForm.addEventListener('click', () => openPopup(modalAddPlace));
-buttonCloseAddForm.addEventListener('click', () => closePopup(modalAddPlace));
+
+modalWindowList.forEach((popup) => {
+    popup.addEventListener('mousedown', (evt) => {
+ if (evt.target.classList.contains('modal-window_active')) {
+    closePopup(popup)
+ }
+    })
+})
 
     for (let i = 0; i < initialCardList.length; i ++) {
 createCard(initialCardList[i].name, initialCardList[i].link)
     };
 
+
+import { enableValidation } from './validation.js';
+
+enableValidation()

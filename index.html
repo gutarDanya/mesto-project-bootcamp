@@ -15,14 +15,14 @@
     <section class="modal-window modal-window_place_edit-form">
         <div class="form-container">
             <button type="button" class="form__close-button">+</button>
-            <form action="#" name='edit-form' class="form">
+            <form action="#" name='edit-form' class="form" novalidate>
                 <h3 class="form__title">Редактировать профиль</h3>
-                <input type="text" name="name" placeholder="Как вас зовут" class="form__input form__input_type_name "
-                    required>
-                <span name="error-name" class="error-massage"></span>
-                <input type="text" name="bio" placeholder="Расскажите о себе" class="form__input form__input_type_bio"
-                    required>
-                <span name="error-bio" class="error-massage"></span>
+                <input id="name" type="text" name="name" placeholder="Как вас зовут" class="form__input form__input_type_name"
+                    required minlength="2" maxlength="40">
+                <span id="error-name" name="error-name" class="form__span error-massage"></span>
+                <input id="bio" type="text" name="bio" placeholder="Расскажите о себе" class="form__input form__input_type_bio"
+                    required minlength="2" maxlength="200">
+                <span id="error-bio" name="error-bio" class="form__span error-massage"></span>
                 <button type='submit' class="form__save-button form__save-button_disabled">Сохранить</button>
             </form>
         </div>
@@ -31,14 +31,14 @@
     <section class="modal-window modal-window_place_add-form">
         <div class="form-container">
             <button type="button" class="form__close-button">+</button>
-            <form action="#" name='add-place-form' class="form">
+            <form action="#" name='add-place-form' class="form" novalidate>
                 <h3 class="form__title form__title_text_left">Новое место</h3>
-                <input type="text" name="info" placeholder="О посте" class="form__input form__input_type_place"
+                <input id="info" type="text" name="info" placeholder="О посте" class="form__input form__input_type_place"
                     required>
-                <span name="error-info" class="error-massage"></span>
-                <input type="url" name="image" placeholder="ссылка на изображение"
+                <span id="error-info" name="error-info" class="form__span error-massage"></span>
+                <input id="image" type="url" name="image" placeholder="ссылка на изображение"
                     class="form__input form__input_type_image-url" required>
-                <span name="error-image" class="error-massage"></span>
+                <span id="error-image" name="error-image" class="form__span error-massage"></span>
                 <button type='submit' class="form__save-button">Создать</button>
             </form>
         </div>
@@ -98,7 +98,6 @@
         </div>
     </template>
     <script type="module" src="./script.js"></script>
-    <script type="'module" src="./data.js"></script>
 </body>
 
 </html>
