@@ -1,0 +1,10 @@
+.place__button-like {
+    background-image: url(../../../images/like.svg);
+    background-position: center;
+    background-size: cover;
+   min-width: 22px;
+    height:19px;
+    border: none;
+    margin: auto 30px auto auto;
+    background-color: white;
+}

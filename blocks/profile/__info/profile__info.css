@@ -1,0 +1,10 @@
+.profile__info {
+    color:white;
+    display: grid;
+    min-width:340px;
+    grid-template-columns: repeat(2, minmax(min-content, max-content));
+    margin: auto auto auto 30px;
+    column-gap: 18px;
+    row-gap:16px;
+    align-items: center;
+}
