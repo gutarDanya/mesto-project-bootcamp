@@ -1,0 +1,10 @@
+.form__button-submit {
+    width: calc(100% - 72px);
+    background-color: black;
+    height: 50px;
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 400;
+    margin: 48px auto 0;
+    color: white;
+}

@@ -1,0 +1,5 @@
+.form__input {
+    width: calc(100% - 72px);
+    border: 0;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+}
