@@ -1,0 +1,9 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    width:430px;
+    height:330px;
+    align-items: center;
+    background-color: white;
+    border-radius: 10px;
+}
