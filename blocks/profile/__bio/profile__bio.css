@@ -4,3 +4,9 @@
     font-size:18px;
     font-weight: 400;
 }
+
+@media (max-width:1080px) {
+    .profile__bio {
+        margin: 0 auto 0;
+    }
+}

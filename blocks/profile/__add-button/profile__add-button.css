@@ -10,3 +10,16 @@
     background-size: 22px;
     background-repeat: no-repeat;
 }
+
+@media (max-width:1080px) {
+    .profile__add-button {
+        min-width:300px;
+        margin: 36px auto 0;
+    }
+}
+
+@media (max-width: 450px) {
+    .profile__add-button {
+        min-width: 100%;
+    }
+}

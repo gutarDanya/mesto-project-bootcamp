@@ -7,3 +7,10 @@
     background-color: white;
     border-radius: 10px;
 }
+
+@media (max-width: 540px) {
+    .form {
+        width: 282px;
+        height: 322px;
+    }
+}

@@ -8,3 +8,15 @@
     row-gap:16px;
     align-items: center;
 }
+
+@media (max-width: 1080px) {
+    .profile__info {
+        margin: 26px auto 0;
+    }
+}
+
+@media (max-width:450px) {
+    .profile__info {
+        min-width: 282px
+    }
+}

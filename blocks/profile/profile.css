@@ -5,3 +5,24 @@
     min-height: 120px;
     margin: 62px auto 0;
 }
+
+@media (max-width:1080px) {
+    .profile {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media (max-width: 800px) {
+    .profile {
+        width: calc(100% - 38px);
+    }
+}
+
+@media (max-width: 450px) {
+    .profile {
+        justify-items: center;
+        width: 282px;
+    }
+}

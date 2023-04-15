@@ -4,3 +4,12 @@
     font-weight: 900;
     margin: 34px auto 0;
 }
+
+@media (max-width: 540px) {
+    .form__title {
+        font-size: 18px;
+        line-height:22px;
+        font-weight: 900;
+        margin: 25px auto 0;
+    }
+}
