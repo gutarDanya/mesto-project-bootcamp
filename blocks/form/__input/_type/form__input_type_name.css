@@ -1,9 +1,0 @@
-.form__input_type_name {
-    margin: 54px auto 0;
-}
-
-@media (max-width: 540px) {
-    .form__input_type_name {
-        margin: 75px auto 0;
-    }
-}

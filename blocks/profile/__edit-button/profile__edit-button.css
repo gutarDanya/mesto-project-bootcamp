@@ -1,10 +1,17 @@
 .profile__edit-button {
     width: 24px;
-    height:24px;
+    height: 24px;
     border: 1px solid white;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0);
     background-image: url(../../../images/pen.svg);
     background-position: center;
     background-size: 80%;
     background-repeat: no-repeat;
+}
+
+@media(max-width:450px) {
+    .profile__edit-button {
+        width: 18px;
+        height: 18px;
+    }
 }

@@ -1,6 +1,5 @@
 .popup__container {
     opacity: 1;
-    position: absolute;
-    display:flex;
+    display: flex;
     flex-direction: column;
 }

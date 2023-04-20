@@ -5,14 +5,17 @@
     font-size: 18px;
     line-height: 22px;
     font-weight: 400;
-    margin: 48px auto 0;
+    margin: 48px auto 37px;
     color: white;
+    border-radius: 2px;
+    border: 0;
 }
 
 @media (max-width: 540px) {
     .form__button-submit {
-        width: calc(100% -44px);
+        width: calc(100% - 44px);
         font-size: 14px;
-        line-height:17px;
+        line-height: 17px;
+        margin-bottom: 25px;
     }
 }

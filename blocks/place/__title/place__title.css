@@ -1,9 +1,9 @@
 .place__title {
-    margin-left: 21px;
+    margin: 25px auto 32px 21px;
     line-height: 29px;
     font-size: 24px;
     font-weight: 900;
     text-overflow: ellipsis;
-     white-space: nowrap;
-     overflow: hidden;
+    white-space: nowrap;
+    overflow: hidden;
 }
