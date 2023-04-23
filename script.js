@@ -18,6 +18,10 @@ const inputLinkOfPlace = popupAddCard.querySelector('#link');
 const nameOfUser = document.querySelector('.profile__title');
 const bioOfUser = document.querySelector('.profile__bio');
 
+const imageElement = popupOpenedImage.querySelector('.popup__image');
+const textElement = popupOpenedImage.querySelector('.popup__figaption');
+const buttonclosePopup = popupOpenedImage.querySelector('.popup__button-close');
+
 const placesContainer = document.querySelector('.places');
 
 const initialCards = [
@@ -74,9 +78,6 @@ function createCard(placeName, placeUrl) {
     }
 
     function openImage() {
-        const imageElement = popupOpenedImage.querySelector('.popup__image');
-        const textElement = popupOpenedImage.querySelector('.popup__figaption');
-        const buttonclosePopup = popupOpenedImage.querySelector('.popup__button-close');
 
         imageElement.src = imageOfCard.src;
         imageElement.alt = nameOfPlace.textContent;
