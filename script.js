@@ -83,7 +83,6 @@ function createCard(placeName, placeUrl) {
         imageElement.alt = nameOfPlace.textContent;
         textElement.textContent = nameOfPlace.textContent;
         openPopup(popupOpenedImage);
-        buttonclosePopup.addEventListener('click', () => closePopup(popupOpenedImage));
     }
 
     imageOfCard.addEventListener('click', openImage);
@@ -94,29 +93,35 @@ buttonDeleteCard.addEventListener('click', deleteCard);
     imageOfCard.src = placeUrl;
 
     imageOfCard.alt = placeName;
-    placesContainer.prepend(cardAddInProfile);
 
-    return placesContainer
+    return cardAddInProfile
 }
 
 function submitEditForm(evt) {
     evt.preventDefault()
     nameOfUser.textContent = inputNameOfUser.value;
     bioOfUser.textContent = inputBioOfUser.value;
-    inputNameOfUser.placeholder = nameOfUser.textContent;
-    inputBioOfUser.placeholder = bioOfUser.textContent;
-    inputNameOfUser.value = '';
-    inputBioOfUser.value = '';
+
+    closePopup(popupEditProfile);
 }
 
 function submitAddForm(evt) {
     evt.preventDefault();
-    createCard(inputNameOfPlace.value, inputLinkOfPlace.value);
+    const cardToAddInProfile =createCard(inputNameOfPlace.value, inputLinkOfPlace.value);
 
-    inputNameOfPlace.value = '';
-    inputLinkOfPlace.value = '';
+    const nameElement = cardToAddInProfile.querySelector('.place__title').textContent;
+    const imageElement = cardToAddInProfile.querySelector('.place__image').src;
+
+    const cardToAdd = {
+        name: nameElement,
+        link: imageElement
+    }
+
+    initialCards.push(cardToAdd);
 
     closePopup(popupAddCard);
+
+    placesContainer.prepend(createCard(initialCards[initialCards.length - 1].name, initialCards[initialCards.length - 1].link))
 }
 
 buttonOpenEditPopup.addEventListener('click', () => { openPopup(popupEditProfile) });
@@ -125,10 +130,12 @@ buttonCloseEditPopup.addEventListener('click', () => { closePopup(popupEditProfi
 buttonOpenAddPopup.addEventListener('click', () => { openPopup(popupAddCard) });
 buttonCloseAddPopup.addEventListener('click', () => { closePopup(popupAddCard) });
 
+buttonclosePopup.addEventListener('click', () => closePopup(popupOpenedImage));
+
 formEditPorfile.addEventListener('submit', submitEditForm);
 formAddPlace.addEventListener('submit', submitAddForm);
 
 initialCards.forEach((item) => {
-    createCard(item.name, item.link);
+    placesContainer.prepend(createCard(item.name, item.link));
 });
 
