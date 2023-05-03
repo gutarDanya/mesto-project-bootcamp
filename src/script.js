@@ -1,6 +1,9 @@
+import { enableValidation } from "./validate.js";
+
 const popupEditProfile = document.querySelector('.edit-popup');
 const popupAddCard = document.querySelector('.add-popup');
 const popupOpenedImage = document.querySelector('.image-popup')
+const popupList = Array.from(document.querySelectorAll('.popup'));
 
 const formEditPorfile = popupEditProfile.querySelector('.form');
 const formAddPlace = popupAddCard.querySelector('.form');
@@ -97,6 +100,7 @@ buttonDeleteCard.addEventListener('click', deleteCard);
     return cardAddInProfile
 }
 
+
 function submitEditForm(evt) {
     evt.preventDefault()
     nameOfUser.textContent = inputNameOfUser.value;
@@ -124,6 +128,21 @@ function submitAddForm(evt) {
     placesContainer.prepend(createCard(initialCards[initialCards.length - 1].name, initialCards[initialCards.length - 1].link))
 }
 
+popupList.forEach((popup) => {
+    popup.addEventListener('mousedown', (evt) => {
+        if (evt.target.classList.contains('popup_active')) {
+            closePopup(popup)
+        }
+    })
+})
+
+document.addEventListener('keydown', (evt) => {
+if (evt.key === 'Escape') {
+    closePopup(document.querySelector('.popup_active'))
+}
+})
+
+
 buttonOpenEditPopup.addEventListener('click', () => { openPopup(popupEditProfile) });
 buttonCloseEditPopup.addEventListener('click', () => { closePopup(popupEditProfile) });
 
@@ -139,3 +158,4 @@ initialCards.forEach((item) => {
     placesContainer.prepend(createCard(item.name, item.link));
 });
 
+enableValidation()

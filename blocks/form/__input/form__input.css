@@ -9,7 +9,7 @@
 }
 
 .form__input:last-of-type {
-    margin: 30px auto 0;
+    margin: 10px auto 0;
 }
 
 @media (max-width: 540px) {
