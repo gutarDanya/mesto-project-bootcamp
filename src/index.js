@@ -1,3 +1,5 @@
+import '../pages/index.css';
+
 import { enableValidation } from "./validate.js";
 import {initialCards, createCard, popupOpenedImage } from "./card.js";
 import { clickOverlay, closePopup, openPopup, closePopupKey } from "./modal.js";
