@@ -28,9 +28,9 @@ function hasInvalidInput (inputList) {
 
 function toggleButtonState (inputList, buttonElement) {
     if (hasInvalidInput(inputList)) {
-        buttonElement.classList.add('form__button-submit_disabled')
+        buttonElement.classList.add('form__button-submit_disabled');
     } else {
-        buttonElement.classList.remove('form__button-submit_disabled')
+        buttonElement.classList.remove('form__button-submit_disabled');
     }
 };
 

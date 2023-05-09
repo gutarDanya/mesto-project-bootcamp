@@ -1,4 +1,4 @@
-import '../pages/index.css';
+import './index.css';
 
 import { enableValidation } from "./validate.js";
 import {initialCards, createCard, popupOpenedImage } from "./card.js";
@@ -54,7 +54,7 @@ function submitAddForm(evt) {
     placesContainer.prepend(createCard(initialCards[initialCards.length - 1].name, initialCards[initialCards.length - 1].link, openPopup))
 }
 
-closePopupKey()
+closePopupKey(closePopup)
 clickOverlay(closePopup);
 
 buttonOpenEditPopup.addEventListener('click', () => { openPopup(popupEditProfile) });
