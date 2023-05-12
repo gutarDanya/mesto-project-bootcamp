@@ -1,9 +1,9 @@
 import './index.css';
 
 import { enableValidation } from "./validate.js";
-import {initialCards, createCard, popupOpenedImage } from "./card.js";
+import {createCard, popupOpenedImage } from "./card.js";
 import { clickOverlay, closePopup, openPopup, closePopupKey } from "./modal.js";
-import {changeNameOfUser} from "./api.js"
+import {changeNameOfUser, loadStartCards, } from "./api.js"
 
 const popupEditProfile = document.querySelector('.edit-popup');
 const popupAddCard = document.querySelector('.add-popup');
@@ -73,10 +73,7 @@ buttonclosePopup.addEventListener('click', () => closePopup(popupOpenedImage));
 formEditPorfile.addEventListener('submit', submitEditForm);
 formAddPlace.addEventListener('submit', submitAddForm);
 
-initialCards.forEach((item) => {
-    placesContainer.prepend(createCard(item.name, item.link, openPopup));
-});
-
+loadStartCards(placesContainer, openPopup)
 enableValidation()
 
 changeNameOfUser(nameOfUser, bioOfUser, avatarOfUser)
