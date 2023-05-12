@@ -1,4 +1,4 @@
- export const initialCards = [
+export const initialCards = [
     {
         name: 'херуфимы',
         link: 'https://sun9-21.userapi.com/impg/-5A2Bv-Y5dMuH9Zyd4eyy1xNJc8F2_F4P-o7vA/KD1Iw_y2w7o.jpg?size=881x1015&quality=95&sign=cf05db381dcc8776733b03510fee9c2c&type=album'
@@ -17,7 +17,7 @@
     },
     {
         name: 'мраморное здание',
-        link: 'https://vk.com/photo486152365_457244963?rev=1'
+        link: 'https://img.freepik.com/premium-photo/a-marble-background-exudes-a-timeless-and-sophisticated-aesthetic-reminiscent-of-traditional-architecture-and-luxury-design_674594-4909.jpg?w=1060'
     },
     {
         name: 'мраморное здание',
@@ -28,8 +28,8 @@
 export const popupOpenedImage = document.querySelector('.image-popup');
 const imageElement = popupOpenedImage.querySelector('.popup__image');
 const textElement = popupOpenedImage.querySelector('.popup__figaption');
- 
- export function createCard(placeName, placeUrl, openPopup) {
+
+export function createCard(placeName, placeUrl, openPopup) {
     const templateAddCard = document.querySelector('#template-place').content;
     const cardAddInProfile = templateAddCard.querySelector('.place').cloneNode(true);
 
@@ -44,7 +44,7 @@ const textElement = popupOpenedImage.querySelector('.popup__figaption');
     likeOfCard.addEventListener('click', toggleLike);
 
     function deleteCard() {
-     buttonDeleteCard.closest('.place').remove();
+        buttonDeleteCard.closest('.place').remove();
     }
 
     function openImage() {
@@ -57,7 +57,7 @@ const textElement = popupOpenedImage.querySelector('.popup__figaption');
 
     imageOfCard.addEventListener('click', openImage);
 
-buttonDeleteCard.addEventListener('click', deleteCard);
+    buttonDeleteCard.addEventListener('click', deleteCard);
 
     nameOfPlace.textContent = placeName;
     imageOfCard.src = placeUrl;

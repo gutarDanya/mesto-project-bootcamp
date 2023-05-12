@@ -3,6 +3,7 @@ import './index.css';
 import { enableValidation } from "./validate.js";
 import {initialCards, createCard, popupOpenedImage } from "./card.js";
 import { clickOverlay, closePopup, openPopup, closePopupKey } from "./modal.js";
+import {changeNameOfUser} from "./api.js"
 
 const popupEditProfile = document.querySelector('.edit-popup');
 const popupAddCard = document.querySelector('.add-popup');
@@ -23,6 +24,7 @@ const inputLinkOfPlace = popupAddCard.querySelector('#link');
 
 const nameOfUser = document.querySelector('.profile__title');
 const bioOfUser = document.querySelector('.profile__bio');
+const avatarOfUser = document.querySelector('.profile__avatar');
 
 const placesContainer = document.querySelector('.places');
 
@@ -33,6 +35,9 @@ function submitEditForm(evt) {
     bioOfUser.textContent = inputBioOfUser.value;
 
     closePopup(popupEditProfile);
+
+    inputNameOfUser.value = nameOfUser.textContent;
+    inputBioOfUser.value = bioOfUser.textContent;
 }
 
 function submitAddForm(evt) {
@@ -73,3 +78,5 @@ initialCards.forEach((item) => {
 });
 
 enableValidation()
+
+changeNameOfUser(nameOfUser, bioOfUser, avatarOfUser)

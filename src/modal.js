@@ -11,12 +11,12 @@ export function clickOverlay(closePopup) {
     })
 }
 
-export function closePopupKey () {
+export function closePopupKey() {
     document.addEventListener('keydown', (evt) => {
         if (evt.key === 'Escape' && document.querySelector('.popup_active')) {
             closePopup(document.querySelector('.popup_active'))
         }
-        })
+    })
 }
 
 export function openPopup(popup) {
