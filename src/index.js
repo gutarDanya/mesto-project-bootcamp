@@ -3,7 +3,7 @@ import './index.css';
 import { enableValidation } from "./validate.js";
 import {createCard, popupOpenedImage } from "./card.js";
 import { clickOverlay, closePopup, openPopup, closePopupKey } from "./modal.js";
-import {changeNameOfUser, loadStartCards, } from "./api.js"
+import {changeNameOfUser, loadStartCards,SendNewProfile, TestObject} from "./api.js"
 
 const popupEditProfile = document.querySelector('.edit-popup');
 const popupAddCard = document.querySelector('.add-popup');
@@ -73,7 +73,12 @@ buttonclosePopup.addEventListener('click', () => closePopup(popupOpenedImage));
 formEditPorfile.addEventListener('submit', submitEditForm);
 formAddPlace.addEventListener('submit', submitAddForm);
 
+formEditPorfile.addEventListener('submit', () => {
+    SendNewProfile(inputNameOfUser.value, inputBioOfUser.value)
+})
+
 loadStartCards(placesContainer, openPopup)
 enableValidation()
+
 
 changeNameOfUser(nameOfUser, bioOfUser, avatarOfUser)

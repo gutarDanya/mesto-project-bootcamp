@@ -1,6 +1,7 @@
 const myToken = '69d222fd-0392-481b-900a-15a7a7efdad5';
 const myUrl = 'https://mesto.nomoreparties.co/v1/wbf-cohort-8';
 
+import autoprefixer from "autoprefixer";
 import { createCard } from "./card";
 
 export function changeNameOfUser (name, about, avatar) {
@@ -25,7 +26,7 @@ return fetch(`${myUrl}/users/me`, {
 }
 
 export function loadStartCards (container, openPopup) {
-fetch(`${myUrl}/cards`, {
+return fetch(`${myUrl}/cards`, {
     headers: {
         authorization: myToken
     }
@@ -41,15 +42,31 @@ fetch(`${myUrl}/cards`, {
 })
 }
 
-export function SendNewCard () {
-    fetch(`${myUrl}/cards`, {
-        method: 'POST',
+export function SendNewProfile (name, bio) {
+    fetch(`${myUrl}/users/me`, {
+        method: 'PATCH',
         headers: {
             authorization: myToken,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            
+            name: `${name}`,
+            about: `${bio}`
         })
+    })
+    .catch((err) => {
+        console.log(`не получилось отправить данные, ошибка: ${err.status}${err.statustext}`)
+    })
+}
+
+export function TestObject () {
+    return fetch(`${myUrl}/users/me`, {
+        headers: {
+            authorization: myToken
+        }
+    })
+    .then(res => res.json())
+    .then((data) => {
+        console.log(data)
     })
 }
