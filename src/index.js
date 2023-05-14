@@ -3,7 +3,8 @@ import './index.css';
 import { enableValidation } from "./validate.js";
 import {createCard, popupOpenedImage } from "./card.js";
 import { clickOverlay, closePopup, openPopup, closePopupKey } from "./modal.js";
-import {changeNameOfUser, loadStartCards,SendNewProfile, TestObject} from "./api.js"
+import {changeNameOfUser, loadStartCards,SendNewProfile,
+     sendNewCard} from "./api.js"
 
 const popupEditProfile = document.querySelector('.edit-popup');
 const popupAddCard = document.querySelector('.add-popup');
@@ -41,8 +42,8 @@ function submitEditForm(evt) {
 }
 
 function submitAddForm(evt) {
-    evt.preventDefault();
-    const cardToAddInProfile =createCard(inputNameOfPlace.value, inputLinkOfPlace.value, openPopup);
+    evt.location.reload()
+    const cardToAddInProfile = createCard(inputNameOfPlace.value, inputLinkOfPlace.value, openPopup);
 
     const nameElement = cardToAddInProfile.querySelector('.place__title').textContent;
     const imageElement = cardToAddInProfile.querySelector('.place__image').src;
@@ -52,11 +53,7 @@ function submitAddForm(evt) {
         link: imageElement
     }
 
-    initialCards.push(cardToAdd);
-
     closePopup(popupAddCard);
-
-    placesContainer.prepend(createCard(initialCards[initialCards.length - 1].name, initialCards[initialCards.length - 1].link, openPopup))
 }
 
 closePopupKey(closePopup)
@@ -77,8 +74,14 @@ formEditPorfile.addEventListener('submit', () => {
     SendNewProfile(inputNameOfUser.value, inputBioOfUser.value)
 })
 
+formAddPlace.addEventListener('submit', () => {
+    sendNewCard(inputNameOfPlace.value, inputLinkOfPlace.value)
+})
+
 loadStartCards(placesContainer, openPopup)
 enableValidation()
 
 
 changeNameOfUser(nameOfUser, bioOfUser, avatarOfUser)
+
+test()

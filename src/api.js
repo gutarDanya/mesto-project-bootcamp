@@ -34,8 +34,8 @@ return fetch(`${myUrl}/cards`, {
 .then(res => res.json())
 .then((cardsValue) => {
  cardsValue.forEach((card) => {
-    container.prepend(createCard(card.name, card.link, openPopup))
- })
+    container.prepend(createCard(card.name, card.link, card.likes.length, openPopup))
+})
 })
 .catch((err) => {
     console.log(`Не получилось загрузить карточки, ошибка:${err.status}${err.statustext}`)
@@ -68,5 +68,19 @@ export function TestObject () {
     .then(res => res.json())
     .then((data) => {
         console.log(data)
+    })
+}
+
+export function sendNewCard (place, picture) {
+    fetch(`${myUrl}/cards`, {
+        method: 'POST',
+        headers: {
+            authorization: myToken,
+            'Content-type': 'application/json',
+        },
+        body: JSON.stringify({
+        name: place,
+        link: picture
+        })
     })
 }
