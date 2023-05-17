@@ -73,6 +73,18 @@
         </div>
     </div>
 
+    <div class="popup avatar-popup">
+        <div class="popup__container">
+            <button type="button" class="popup__button-close button"></button>
+            <form class="form" novalidate>
+                <h2 class="form__title">Обновить аватар</h2>
+                <input name="avatar" id="avatar" type="url" placeholder="ссылка на аватар" class="form__input" required>
+                <span id="avatar-error" class="form__error"></span>
+                <button type="submit" class="form__button-submit button">Сохранить</button>
+            </form>
+        </div>
+    </div>
+
     <template id="template-place">
         <div class="place">
             <img src="<%=require('../images/trash.svg')%>" alt="удалить элемент" class="place__trash button">

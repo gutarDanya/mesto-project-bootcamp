@@ -4,12 +4,12 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-.form__input:first-of-type {
-    margin: 54px auto 0;
-}
-
 .form__input:last-of-type {
     margin: 10px auto 0;
+}
+
+.form__input:first-of-type {
+    margin: 54px auto 0;
 }
 
 @media (max-width: 540px) {
