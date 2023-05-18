@@ -1,0 +1,10 @@
+.profile__avatar-container {
+    display: flex;
+    flex-direction: center;
+    align-items: center;
+    width:120px;
+    height:120px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+}
