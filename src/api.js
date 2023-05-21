@@ -3,6 +3,8 @@ const myUrl = 'https://mesto.nomoreparties.co/v1/wbf-cohort-8';
 
 import autoprefixer from "autoprefixer";
 import { createCard, myID } from "./card";
+import { closePopup, openPopup, } from "./modal";
+import { placesContainer } from ".";
 
 export function changeNameOfUser(name, about, avatar) {
     return fetch(`${myUrl}/users/me`, {
@@ -34,7 +36,7 @@ export function loadStartCards(container, openPopup) {
         .then(res => res.json())
         .then((cardsValue) => {
             cardsValue.forEach((card) => {
-                container.prepend(createCard(card.name, card.link, card.likes.length, openPopup, card.owner._id, card._id))
+                container.prepend(createCard(card.name, card.link, card.likes.length, openPopup, card.owner._id, card._id, card.likes))
             })
         })
         .catch((err) => {
@@ -42,7 +44,7 @@ export function loadStartCards(container, openPopup) {
         })
 }
 
-export function SendNewProfile(button, name, bio) {
+export function SendNewProfile(button, name, bio, nameOfUser, bioOfUser, inputNameOfUser, inputBioOfUser, popup) {
     fetch(`${myUrl}/users/me`, {
         method: 'PATCH',
         headers: {
@@ -54,15 +56,25 @@ export function SendNewProfile(button, name, bio) {
             about: `${bio}`
         })
     })
+    .then(res => res.json())
+    .then((data) => {
+        nameOfUser.textContent = data.name;
+        bioOfUser.textContent = data.about;
+    
+        closePopup(popup);
+    
+        inputNameOfUser = nameOfUser.textContent;
+        inputBioOfUser = bioOfUser.textContent;
+    })
         .catch((err) => {
             console.log(`не получилось отправить данные, ошибка: ${err.status}${err.statustext}`)
         })
-        .finally((value) => {
+        .finally(() => {
             button.textContent = 'Сохранение'
         })
 }
 
-export function sendNewCard(button, place, picture) {
+export function sendNewCard(place, picture, popup, button) {
     fetch(`${myUrl}/cards`, {
         method: 'POST',
         headers: {
@@ -77,11 +89,16 @@ export function sendNewCard(button, place, picture) {
             }
         })
     })
+    .then(res => res.json())
+    .then((card) => {
+        placesContainer.append(createCard(card.name, card.link, card.likes.length, openPopup, card.owner._id, card._id, card.likes))
+        closePopup(popup)
+    })
     .catch((err) => {
         console.log(`Ошибка при сохранении карточки: ${err.status}${err.statusText}`)
     })
-    .finally((value) => {
-        button.textContent = 'сохраниение'
+    .finally(() => {
+        button.textContent = "Сохранение"
     })
 }
 
@@ -122,18 +139,20 @@ function removeLikeOfCard(idCard) {
     })
 }
 
-export function toggleButtonOfLike (button, idCard) {
+export function toggleButtonOfLike (number ,button, idCard) {
     if (!button.classList.contains('place__button-like_type_active')) {
         button.classList.add('place__button-like_type_active')
         addLikeToCard(idCard)
+        number.textContent = parseInt(number.textContent) + 1
     } else {
         button.classList.remove('place__button-like_type_active')
         removeLikeOfCard(idCard)
+        number.textContent = number.textContent - 1;
     }
 
 }
 
-export function sendAvatarOfUser (button, urlOfAvatar) {
+export function sendAvatarOfUser (button, urlOfAvatar, avatar, popup) {
     return fetch(`${myUrl}/users/me/avatar`, {
         method: 'PATCH',
         headers: {
@@ -144,10 +163,15 @@ export function sendAvatarOfUser (button, urlOfAvatar) {
         avatar: urlOfAvatar
         })
     })
+    .then(res => res.json())
+    .then((data) => {
+        avatar.src = data.avatar;
+        closePopup(popup)
+    })
     .catch((err) => {
         console.log(`Ошибка при поптыке изменить аватар: ${err.status} ${err.statusText}`)
     })
-    .finally((value) => {
+    .finally(() => {
         renderLoading(true, button)
     })
 }

@@ -1,7 +1,7 @@
 import './index.css';
 
 import { enableValidation } from "./validate.js";
-import {createCard, popupOpenedImage } from "./card.js";
+import {popupOpenedImage } from "./card.js";
 import { clickOverlay, closePopup, openPopup, closePopupKey } from "./modal.js";
 import {changeNameOfUser, loadStartCards, SendNewProfile,
      sendNewCard, sendAvatarOfUser} from "./api.js"
@@ -36,42 +36,7 @@ const nameOfUser = document.querySelector('.profile__title');
 const bioOfUser = document.querySelector('.profile__bio');
 const avatarOfUser = document.querySelector('.profile__avatar');
 
-const placesContainer = document.querySelector('.places');
-
-
-function submitEditForm(evt) {
-    evt.preventDefault()
-    nameOfUser.textContent = inputNameOfUser.value;
-    bioOfUser.textContent = inputBioOfUser.value;
-
-    closePopup(popupEditProfile);
-
-    inputNameOfUser.value = nameOfUser.textContent;
-    inputBioOfUser.value = bioOfUser.textContent;
-}
-
-function submitAddForm(evt) {
-    evt.preventDefault()
-    const cardToAddInProfile = createCard(inputNameOfPlace.value, inputLinkOfPlace.value, openPopup);
-
-    const nameElement = cardToAddInProfile.querySelector('.place__title').textContent;
-    const imageElement = cardToAddInProfile.querySelector('.place__image').src;
-
-    const cardToAdd = {
-        name: nameElement,
-        link: imageElement
-    }
-
-    closePopup(popupAddCard);
-}
-
-function submitAvatarForm(evt) {
-    evt.preventDefault();
-    closePopup(popupEditAvatar);
-}
-
-closePopupKey(closePopup)
-clickOverlay(closePopup);
+export const placesContainer = document.querySelector('.places');
 
 avatarOfUser.addEventListener('click', () => {openPopup(popupEditAvatar)});
 buttonCloseAvatarPopup.addEventListener('click', () => {closePopup(popupEditAvatar)})
@@ -84,22 +49,20 @@ buttonCloseAddPopup.addEventListener('click', () => { closePopup(popupAddCard) }
 
 buttonClosePopup.addEventListener('click', () => closePopup(popupOpenedImage));
 
-formEditPorfile.addEventListener('submit', submitEditForm);
-formAddPlace.addEventListener('submit', submitAddForm);
-formEditAvatar.addEventListener('submit', submitAvatarForm);
-
 formEditPorfile.addEventListener('submit', () => {
-    SendNewProfile(buttonSubmitEditForm,inputNameOfUser.value, inputBioOfUser.value)
+    SendNewProfile(buttonSubmitEditForm,inputNameOfUser.value, inputBioOfUser.value, nameOfUser, bioOfUser,  inputNameOfUser.value, inputBioOfUser.value, popupEditProfile)
 })
 
 formAddPlace.addEventListener('submit', () => {
-    sendNewCard(buttonSubmitAddForm, inputNameOfPlace.value, inputLinkOfPlace.value)
+    sendNewCard(inputNameOfPlace.value, inputLinkOfPlace.value, popupAddCard, buttonSubmitAddForm)
 })
 
 formEditAvatar.addEventListener('submit', () => {
-    sendAvatarOfUser(buttonSubmitAvatarForm ,inputLinkOfAvatar.value) 
+    sendAvatarOfUser(buttonSubmitAvatarForm ,inputLinkOfAvatar.value, avatarOfUser, popupEditAvatar) 
 })
 
+closePopupKey(closePopup)
+clickOverlay(closePopup);
 loadStartCards(placesContainer, openPopup)
 enableValidation()
 changeNameOfUser(nameOfUser, bioOfUser, avatarOfUser)
