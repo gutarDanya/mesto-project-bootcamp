@@ -1,20 +1,21 @@
-const myToken = '69d222fd-0392-481b-900a-15a7a7efdad5';
-const myUrl = 'https://mesto.nomoreparties.co/v1/wbf-cohort-8';
+const config = {
+    headers: '69d222fd-0392-481b-900a-15a7a7efdad5',
+    baseURL: 'https://mesto.nomoreparties.co/v1/wbf-cohort-8'
+};
 
 import autoprefixer from "autoprefixer";
 import { createCard, myID } from "./card";
 import { closePopup, openPopup, } from "./modal";
-import { placesContainer } from ".";
+import { placesContainer } from "..";
+import { checkResponse } from "./utils";
 
 export function changeNameOfUser(name, about, avatar) {
-    return fetch(`${myUrl}/users/me`, {
+    return fetch(`${config.baseURL}/users/me`, {
         headers: {
-            authorization: myToken
+            authorization: config.headers
         }
     })
-        .then((res) => {
-            return res.json()
-        })
+        .then(checkResponse)
         .then((data) => {
             name.textContent = data.name;
             about.textContent = data.about;
@@ -28,12 +29,12 @@ export function changeNameOfUser(name, about, avatar) {
 }
 
 export function loadStartCards(container, openPopup) {
-    return fetch(`${myUrl}/cards`, {
+    return fetch(`${config.baseURL}/cards`, {
         headers: {
-            authorization: myToken
+            authorization: config.headers
         }
     })
-        .then(res => res.json())
+        .then(checkResponse)
         .then((cardsValue) => {
             cardsValue.forEach((card) => {
                 container.prepend(createCard(card.name, card.link, card.likes.length, openPopup, card.owner._id, card._id, card.likes))
@@ -45,10 +46,10 @@ export function loadStartCards(container, openPopup) {
 }
 
 export function SendNewProfile(button, name, bio, nameOfUser, bioOfUser, inputNameOfUser, inputBioOfUser, popup) {
-    fetch(`${myUrl}/users/me`, {
+    fetch(`${config.baseURL}/users/me`, {
         method: 'PATCH',
         headers: {
-            authorization: myToken,
+            authorization: config.headers,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
@@ -56,7 +57,7 @@ export function SendNewProfile(button, name, bio, nameOfUser, bioOfUser, inputNa
             about: `${bio}`
         })
     })
-    .then(res => res.json())
+    .then(checkResponse)
     .then((data) => {
         nameOfUser.textContent = data.name;
         bioOfUser.textContent = data.about;
@@ -66,19 +67,16 @@ export function SendNewProfile(button, name, bio, nameOfUser, bioOfUser, inputNa
         inputNameOfUser = nameOfUser.textContent;
         inputBioOfUser = bioOfUser.textContent;
     })
-        .catch((err) => {
-            console.log(`не получилось отправить данные, ошибка: ${err.status}${err.statustext}`)
-        })
         .finally(() => {
             button.textContent = 'Сохранение'
         })
 }
 
 export function sendNewCard(place, picture, popup, button) {
-    fetch(`${myUrl}/cards`, {
+    fetch(`${config.baseURL}/cards`, {
         method: 'POST',
         headers: {
-            authorization: myToken,
+            authorization: config.headers,
             'Content-type': 'application/json',
         },
         body: JSON.stringify({
@@ -89,7 +87,7 @@ export function sendNewCard(place, picture, popup, button) {
             }
         })
     })
-    .then(res => res.json())
+    .then(checkResponse)
     .then((card) => {
         placesContainer.append(createCard(card.name, card.link, card.likes.length, openPopup, card.owner._id, card._id, card.likes))
         closePopup(popup)
@@ -103,19 +101,19 @@ export function sendNewCard(place, picture, popup, button) {
 }
 
 export function removeCard(idCard) {
-    return fetch(`${myUrl}/cards/${idCard}`, {
+    return fetch(`${config.baseURL}/cards/${idCard}`, {
         method: "DELETE",
         headers: {
-            authorization: myToken
+            authorization: config.headers
         }
     })
 }
 
 function addLikeToCard(idCard) {
-    return fetch(`${myUrl}/cards/likes/${idCard}`, {
+    return fetch(`${config.baseURL}/cards/likes/${idCard}`, {
         method: 'PUT',
         headers: {
-            authorization: myToken,
+            authorization: config.headers,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
@@ -128,10 +126,10 @@ function addLikeToCard(idCard) {
 }
 
 function removeLikeOfCard(idCard) {
-    return fetch(`${myUrl}/cards/likes/${idCard}`, {
+    return fetch(`${config.baseURL}/cards/likes/${idCard}`, {
         method: 'DELETE',
         headers: {
-            authorization: myToken
+            authorization: config.headers
         }
     })
     .catch((err) => {
@@ -153,17 +151,17 @@ export function toggleButtonOfLike (number ,button, idCard) {
 }
 
 export function sendAvatarOfUser (button, urlOfAvatar, avatar, popup) {
-    return fetch(`${myUrl}/users/me/avatar`, {
+    return fetch(`${config.baseURL}/users/me/avatar`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
-            authorization: myToken
+            authorization: config.headers
         },
         body: JSON.stringify({
         avatar: urlOfAvatar
         })
     })
-    .then(res => res.json())
+    .then(checkResponse)
     .then((data) => {
         avatar.src = data.avatar;
         closePopup(popup)
@@ -183,12 +181,13 @@ if (isLoading) {
 }
 
 
-fetch(`${myUrl}/cards`, {
+
+fetch(`${config.baseURL}/cards`, {
     headers: {
-        authorization: myToken
+        authorization: config.headers
     }
 })
-.then(res => res.json())
+.then(checkResponse)
 .then((cards) => {
     console.log(cards)
 })

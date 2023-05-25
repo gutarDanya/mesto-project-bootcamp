@@ -1,14 +1,14 @@
 import './index.css';
 
-import { enableValidation } from "./validate.js";
-import {popupOpenedImage } from "./card.js";
-import { clickOverlay, closePopup, openPopup, closePopupKey } from "./modal.js";
+import { enableValidation } from "./components/validate.js";
+import {popupOpenedImage } from "./components/card.js";
+import { clickOverlay, closePopup, openPopup, closePopupKey } from "./components/modal.js";
 import {changeNameOfUser, loadStartCards, SendNewProfile,
-     sendNewCard, sendAvatarOfUser} from "./api.js"
+     sendNewCard, sendAvatarOfUser} from "./components/api.js"
 
 const popupEditProfile = document.querySelector('.edit-popup');
 const popupAddCard = document.querySelector('.add-popup');
-const popupEditAvatar = document.querySelector('.avatar-popup')
+const popupEditAvatar = document.querySelector('.avatar-popup');
 
 const formEditPorfile = popupEditProfile.querySelector('.form');
 const formAddPlace = popupAddCard.querySelector('.form');
