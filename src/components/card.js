@@ -10,22 +10,22 @@ function deleteCard(button) {
     button.closest('.place').remove();
 }
 
-function toggleButtonOfLike (number ,button, idCard) {
+function toggleButtonOfLike(number, button, idCard) {
     if (!button.classList.contains('place__button-like_type_active')) {
         addLikeToCard(idCard)
-        .then((data) => {
-            button.classList.add('place__button-like_type_active')
-            number.textContent = data.likes.length
-        })
-        .catch((err) => {
-            console.log(`Ошибка при попытке поставить лайк: ${err.status} ${err.statusText}`)
-        });
+            .then((data) => {
+                button.classList.add('place__button-like_type_active')
+                number.textContent = data.likes.length
+            })
+            .catch((err) => {
+                console.log(`Ошибка при попытке поставить лайк: ${err.status} ${err.statusText}`)
+            });
     } else {
         removeLikeOfCard(idCard)
-        .then((data) => {
-            button.classList.remove('place__button-like_type_active');
-            number.textContent = data.likes.length;
-        })
+            .then((data) => {
+                button.classList.remove('place__button-like_type_active');
+                number.textContent = data.likes.length;
+            })
             .catch((err) => {
                 console.log(`Ошибка при попытке убрать лайк: ${err.status} ${err.statusText}`)
             });
@@ -63,7 +63,7 @@ export function createCard(placeName, placeUrl, likes, openPopup, idOfUser, idOf
     const numberlikeOfCard = cardAddInProfile.querySelector('.place__like-number')
     imageOfCard.addEventListener('click', () => { openImage(imageOfCard, nameOfUser, openPopup) });
     buttonDeleteCard.addEventListener('click', () => { deleteCard(buttonDeleteCard) });
-    likeOfCard.addEventListener('click', () => { toggleButtonOfLike(numberlikeOfCard ,likeOfCard, idOfCard) });
+    likeOfCard.addEventListener('click', () => { toggleButtonOfLike(numberlikeOfCard, likeOfCard, idOfCard) });
     checkLike(like, likeOfCard)
 
     buttonDeleteCard.addEventListener('click', () => { removeCard(idOfCard) })

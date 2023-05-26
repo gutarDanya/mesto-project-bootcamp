@@ -1,10 +1,12 @@
 import '../index.css';
 
 import { enableValidation } from "./validate.js";
-import {popupOpenedImage, createCard } from "./card.js";
+import { popupOpenedImage, createCard } from "./card.js";
 import { clickOverlay, closePopup, openPopup, closePopupKey } from "./modal.js";
-import {startNameOfUser, loadStartCards,sendNewProfile,
-     sendNewCard, sendAvatarOfUser} from "./api.js"
+import {
+    startNameOfUser, loadStartCards, sendNewProfile,
+    sendNewCard, sendAvatarOfUser
+} from "./api.js"
 
 const popupEditProfile = document.querySelector('.edit-popup');
 const popupAddCard = document.querySelector('.add-popup');
@@ -44,31 +46,31 @@ Promise.all([
     startNameOfUser(),
     loadStartCards()
 ])
-.then(([user, cards]) => {
-    userId = user._id
-    nameOfUser.textContent = user.name;
-    bioOfUser.textContent = user.about;
-    avatarOfUser.src = user.avatar
-    cards.forEach((card) => {
-        placesContainer.prepend(createCard(card.name, card.link, card.likes.length, openPopup, userId, card._id, card.likes))
+    .then(([user, cards]) => {
+        userId = user._id
+        nameOfUser.textContent = user.name;
+        bioOfUser.textContent = user.about;
+        avatarOfUser.src = user.avatar
+        cards.forEach((card) => {
+            placesContainer.prepend(createCard(card.name, card.link, card.likes.length, openPopup, userId, card._id, card.likes))
+        })
+        return userId
     })
-    return userId
-})
-.catch(([user, cards]) => {
-    nameOfUser.textContent = `Ошибка загрузки имени:${user.status}${user.statustext}, сорян`;
-    bioOfUser.textContent = `Ошибка загрузки биографии:${user.status}${user.statustext}, сегодня без био`
-    avatarOfUser.src = 'https://thumbs.dreamstime.com/z/error-sign-error-message-icon-logo-dark-background-white-error-sign-error-message-icon-logo-dark-background-133331672.jpg'
-    console.log(cards.status)
-})
+    .catch(([user, cards]) => {
+        nameOfUser.textContent = `Ошибка загрузки имени:${user.status}${user.statustext}, сорян`;
+        bioOfUser.textContent = `Ошибка загрузки биографии:${user.status}${user.statustext}, сегодня без био`
+        avatarOfUser.src = 'https://thumbs.dreamstime.com/z/error-sign-error-message-icon-logo-dark-background-white-error-sign-error-message-icon-logo-dark-background-133331672.jpg'
+        console.log(cards.status)
+    })
 
-avatarOfUser.addEventListener('click', () => {openPopup(popupEditAvatar)});
-buttonCloseAvatarPopup.addEventListener('click', () => {closePopup(popupEditAvatar)})
+avatarOfUser.addEventListener('click', () => { openPopup(popupEditAvatar) });
+buttonCloseAvatarPopup.addEventListener('click', () => { closePopup(popupEditAvatar) })
 
 buttonOpenEditPopup.addEventListener('click', () => {
-     openPopup(popupEditProfile)
-     inputNameOfUser.value = nameOfUser.textContent;
-     inputBioOfUser.value = bioOfUser.textContent;
-     });
+    openPopup(popupEditProfile)
+    inputNameOfUser.value = nameOfUser.textContent;
+    inputBioOfUser.value = bioOfUser.textContent;
+});
 buttonCloseEditPopup.addEventListener('click', () => { closePopup(popupEditProfile) });
 
 buttonOpenAddPopup.addEventListener('click', () => { openPopup(popupAddCard) });
@@ -79,18 +81,18 @@ buttonClosePopup.addEventListener('click', () => closePopup(popupOpenedImage));
 formEditPorfile.addEventListener('submit', () => {
     buttonSubmitEditForm.textContent = 'Сохранение...'
     sendNewProfile(inputNameOfUser.value, inputBioOfUser.value)
-    .then((data) => {
-        nameOfUser.textContent = data.name;
-        bioOfUser.textContent = data.about;
-    
-        closePopup(popupEditProfile);
-    
-        inputNameOfUser.value = nameOfUser.textContent;
-        inputBioOfUser.value = bioOfUser.textContent;
-    })
-    .catch((err) => {
-        console.log(`Ошибка сохранения профиля:${err.status}`)
-    })
+        .then((data) => {
+            nameOfUser.textContent = data.name;
+            bioOfUser.textContent = data.about;
+
+            closePopup(popupEditProfile);
+
+            inputNameOfUser.value = nameOfUser.textContent;
+            inputBioOfUser.value = bioOfUser.textContent;
+        })
+        .catch((err) => {
+            console.log(`Ошибка сохранения профиля:${err.status}`)
+        })
         .finally(() => {
             buttonSubmitEditForm.textContent = 'Сохранить'
         });
@@ -99,31 +101,31 @@ formEditPorfile.addEventListener('submit', () => {
 formAddPlace.addEventListener('submit', () => {
     buttonSubmitAddForm.textContent = 'Сохранение...'
     sendNewCard(inputNameOfPlace.value, inputLinkOfPlace.value)
-    .then((card) => {
-        placesContainer.prepend(createCard(card.name, card.link, card.likes.length, openPopup, card.owner._id, card._id, card.likes))
-        closePopup(popupAddCard)
-    })
-    .catch((err) => {
-        console.log(`Ошибка при сохранении карточки: ${err.status}${err.statusText}`)
-    })
-    .finally(() => {
-        buttonSubmitAddForm.textContent = 'Сохранить'
-    });
+        .then((card) => {
+            placesContainer.prepend(createCard(card.name, card.link, card.likes.length, openPopup, card.owner._id, card._id, card.likes))
+            closePopup(popupAddCard)
+        })
+        .catch((err) => {
+            console.log(`Ошибка при сохранении карточки: ${err.status}${err.statusText}`)
+        })
+        .finally(() => {
+            buttonSubmitAddForm.textContent = 'Сохранить'
+        });
 })
 
 formEditAvatar.addEventListener('submit', () => {
     buttonSubmitAvatarForm.textContent = 'Сохранение...'
     sendAvatarOfUser(inputLinkOfAvatar.value)
-    .then((data) => {
-        avatarOfUser.src = data.avatar;
-        closePopup(popupEditAvatar)
-    })
-    .catch((err) => {
-        console.log(`Ошибка при поптыке изменить аватар: ${err.status} ${err.statusText}`)
-    })
-    .finally(() => {
-        buttonSubmitAvatarForm.textContent = 'Сохранить'
-    });
+        .then((data) => {
+            avatarOfUser.src = data.avatar;
+            closePopup(popupEditAvatar)
+        })
+        .catch((err) => {
+            console.log(`Ошибка при поптыке изменить аватар: ${err.status} ${err.statusText}`)
+        })
+        .finally(() => {
+            buttonSubmitAvatarForm.textContent = 'Сохранить'
+        });
 })
 
 clickOverlay(closePopup);

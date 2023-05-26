@@ -2,7 +2,7 @@ const config = {
     headers: {
         authorization: '69d222fd-0392-481b-900a-15a7a7efdad5',
         'Content-Type': 'application/json',
-      },
+    },
     baseUrl: 'https://mesto.nomoreparties.co/v1/wbf-cohort-8'
 };
 
@@ -35,7 +35,7 @@ export function sendNewProfile(name, bio) {
             about: `${bio}`
         })
     })
-    .then(checkResponse)
+        .then(checkResponse)
 }
 
 export function sendNewCard(place, picture) {
@@ -50,7 +50,7 @@ export function sendNewCard(place, picture) {
             }
         })
     })
-    .then(checkResponse)
+        .then(checkResponse)
 }
 
 export function removeCard(idCard) {
@@ -65,10 +65,10 @@ export function addLikeToCard(idCard) {
         method: 'PUT',
         headers: config.headers,
         body: JSON.stringify({
-        _id: myID
+            _id: myID
         })
     })
-    .then(checkResponse)
+        .then(checkResponse)
 }
 
 export function removeLikeOfCard(idCard) {
@@ -76,19 +76,19 @@ export function removeLikeOfCard(idCard) {
         method: 'DELETE',
         headers: config.headers
     })
-    .then(checkResponse)
+        .then(checkResponse)
 }
 
 
-export function sendAvatarOfUser (urlOfAvatar) {
+export function sendAvatarOfUser(urlOfAvatar) {
     return fetch(`${config.baseUrl}/users/me/avatar`, {
         method: 'PATCH',
         headers: config.headers,
         body: JSON.stringify({
-        avatar: urlOfAvatar
+            avatar: urlOfAvatar
         })
     })
-    .then(checkResponse)
+        .then(checkResponse)
 }
 
 
