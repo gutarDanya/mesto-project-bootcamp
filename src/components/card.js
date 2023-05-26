@@ -23,8 +23,8 @@ function toggleButtonOfLike (number ,button, idCard) {
     } else {
         removeLikeOfCard(idCard)
         .then((data) => {
-            button.classList.remove('place__button-like_type_active')
-            number.textContent = data.likes.length
+            button.classList.remove('place__button-like_type_active');
+            number.textContent = data.likes.length;
         })
             .catch((err) => {
                 console.log(`Ошибка при попытке убрать лайк: ${err.status} ${err.statusText}`)

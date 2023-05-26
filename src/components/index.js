@@ -52,6 +52,7 @@ Promise.all([
     cards.forEach((card) => {
         placesContainer.prepend(createCard(card.name, card.link, card.likes.length, openPopup, userId, card._id, card.likes))
     })
+    return userId
 })
 .catch(([user, cards]) => {
     nameOfUser.textContent = `Ошибка загрузки имени:${user.status}${user.statustext}, сорян`;
