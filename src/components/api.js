@@ -6,47 +6,41 @@ const config = {
 import autoprefixer from "autoprefixer";
 import { createCard, myID } from "./card";
 import { closePopup, openPopup, } from "./modal";
-import { placesContainer } from "..";
 import { checkResponse } from "./utils";
 
-export function changeNameOfUser(name, about, avatar) {
+export function getIdOfUser () {
+    return fetch(`${config.baseURL}/users/me`, {
+        headers: {
+            authorization: config.headers
+        }
+    })
+    .then(checkResponse)
+    .then((data) => {
+        return data._id
+    })
+}
+
+export function startNameOfUser() {
     return fetch(`${config.baseURL}/users/me`, {
         headers: {
             authorization: config.headers
         }
     })
         .then(checkResponse)
-        .then((data) => {
-            name.textContent = data.name;
-            about.textContent = data.about;
-            avatar.src = data.avatar
-        })
-        .catch((err) => {
-            name.textContent = `Ошибка загрузки имени:${err.status}${err.statustext}, сорян`;
-            about.textContent = `Ошибка загрузки биографии:${err.status}${err.statustext}, сегодня без био`
-            avatar.src = 'https://thumbs.dreamstime.com/z/error-sign-error-message-icon-logo-dark-background-white-error-sign-error-message-icon-logo-dark-background-133331672.jpg'
-        })
 }
 
-export function loadStartCards(container, openPopup) {
+export function loadStartCards() {
     return fetch(`${config.baseURL}/cards`, {
         headers: {
             authorization: config.headers
         }
     })
         .then(checkResponse)
-        .then((cardsValue) => {
-            cardsValue.forEach((card) => {
-                container.prepend(createCard(card.name, card.link, card.likes.length, openPopup, card.owner._id, card._id, card.likes))
-            })
-        })
-        .catch((err) => {
-            console.log(`Не получилось загрузить карточки, ошибка:${err.status}${err.statustext}`)
-        })
+
 }
 
-export function SendNewProfile(button, name, bio, nameOfUser, bioOfUser, inputNameOfUser, inputBioOfUser, popup) {
-    fetch(`${config.baseURL}/users/me`, {
+export function sendNewProfile(name, bio) {
+    return fetch(`${config.baseURL}/users/me`, {
         method: 'PATCH',
         headers: {
             authorization: config.headers,
@@ -58,22 +52,10 @@ export function SendNewProfile(button, name, bio, nameOfUser, bioOfUser, inputNa
         })
     })
     .then(checkResponse)
-    .then((data) => {
-        nameOfUser.textContent = data.name;
-        bioOfUser.textContent = data.about;
-    
-        closePopup(popup);
-    
-        inputNameOfUser = nameOfUser.textContent;
-        inputBioOfUser = bioOfUser.textContent;
-    })
-        .finally(() => {
-            button.textContent = 'Сохранение'
-        })
 }
 
-export function sendNewCard(place, picture, popup, button) {
-    fetch(`${config.baseURL}/cards`, {
+export function sendNewCard(place, picture) {
+    return fetch(`${config.baseURL}/cards`, {
         method: 'POST',
         headers: {
             authorization: config.headers,
@@ -88,16 +70,6 @@ export function sendNewCard(place, picture, popup, button) {
         })
     })
     .then(checkResponse)
-    .then((card) => {
-        placesContainer.append(createCard(card.name, card.link, card.likes.length, openPopup, card.owner._id, card._id, card.likes))
-        closePopup(popup)
-    })
-    .catch((err) => {
-        console.log(`Ошибка при сохранении карточки: ${err.status}${err.statusText}`)
-    })
-    .finally(() => {
-        button.textContent = "Сохранение"
-    })
 }
 
 export function removeCard(idCard) {
@@ -150,7 +122,7 @@ export function toggleButtonOfLike (number ,button, idCard) {
 
 }
 
-export function sendAvatarOfUser (button, urlOfAvatar, avatar, popup) {
+export function sendAvatarOfUser (urlOfAvatar) {
     return fetch(`${config.baseURL}/users/me/avatar`, {
         method: 'PATCH',
         headers: {
@@ -162,32 +134,16 @@ export function sendAvatarOfUser (button, urlOfAvatar, avatar, popup) {
         })
     })
     .then(checkResponse)
-    .then((data) => {
-        avatar.src = data.avatar;
-        closePopup(popup)
-    })
-    .catch((err) => {
-        console.log(`Ошибка при поптыке изменить аватар: ${err.status} ${err.statusText}`)
-    })
-    .finally(() => {
-        renderLoading(true, button)
-    })
-}
-
-function renderLoading (isLoading, button) {
-if (isLoading) {
-    button.textContent = 'сохраниение'
-}
 }
 
 
 
-fetch(`${config.baseURL}/cards`, {
-    headers: {
-        authorization: config.headers
-    }
-})
-.then(checkResponse)
-.then((cards) => {
-    console.log(cards)
-})
+// fetch(`${config.baseURL}/cards`, {
+//     headers: {
+//         authorization: config.headers
+//     }
+// })
+// .then(checkResponse)
+// .then((cards) => {
+//     console.log(cards)
+// })
