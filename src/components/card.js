@@ -4,10 +4,33 @@ const textElement = popupOpenedImage.querySelector('.popup__figaption');
 let nameOfUser = document.querySelector('.profile__title');
 export const myID = '0372648f2abad853d6418be6'
 
-import { removeCard, toggleButtonOfLike } from "./api";
+import { removeCard, addLikeToCard, removeLikeOfCard } from "./api";
 
 function deleteCard(button) {
     button.closest('.place').remove();
+}
+
+function toggleButtonOfLike (number ,button, idCard) {
+    if (!button.classList.contains('place__button-like_type_active')) {
+        addLikeToCard(idCard)
+        .then(() => {
+            button.classList.add('place__button-like_type_active')
+            number.textContent = parseInt(number.textContent) + 1
+        })
+        .catch((err) => {
+            console.log(`Ошибка при попытке поставить лайк: ${err.status} ${err.statusText}`)
+        });
+    } else {
+        removeLikeOfCard(idCard)
+        .then(() => {
+            button.classList.remove('place__button-like_type_active')
+            number.textContent = number.textContent - 1;
+        })
+            .catch((err) => {
+                console.log(`Ошибка при попытке убрать лайк: ${err.status} ${err.statusText}`)
+            });
+    }
+
 }
 
 function openImage(image, name, openPopup) {

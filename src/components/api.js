@@ -81,7 +81,7 @@ export function removeCard(idCard) {
     })
 }
 
-function addLikeToCard(idCard) {
+export function addLikeToCard(idCard) {
     return fetch(`${config.baseURL}/cards/likes/${idCard}`, {
         method: 'PUT',
         headers: {
@@ -92,35 +92,17 @@ function addLikeToCard(idCard) {
         _id: myID
         })
     })
-    .catch((err) => {
-        console.log(`Ошибка при попытке поставить лайк: ${err.status} ${err.statusText}`)
-    })
 }
 
-function removeLikeOfCard(idCard) {
+export function removeLikeOfCard(idCard) {
     return fetch(`${config.baseURL}/cards/likes/${idCard}`, {
         method: 'DELETE',
         headers: {
             authorization: config.headers
         }
     })
-    .catch((err) => {
-        console.log(`Ошибка при попытке убрать лайк: ${err.status} ${err.statusText}`)
-    })
 }
 
-export function toggleButtonOfLike (number ,button, idCard) {
-    if (!button.classList.contains('place__button-like_type_active')) {
-        button.classList.add('place__button-like_type_active')
-        addLikeToCard(idCard)
-        number.textContent = parseInt(number.textContent) + 1
-    } else {
-        button.classList.remove('place__button-like_type_active')
-        removeLikeOfCard(idCard)
-        number.textContent = number.textContent - 1;
-    }
-
-}
 
 export function sendAvatarOfUser (urlOfAvatar) {
     return fetch(`${config.baseURL}/users/me/avatar`, {
