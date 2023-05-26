@@ -1,51 +1,35 @@
 const config = {
-    headers: '69d222fd-0392-481b-900a-15a7a7efdad5',
-    baseURL: 'https://mesto.nomoreparties.co/v1/wbf-cohort-8'
+    headers: {
+        authorization: '69d222fd-0392-481b-900a-15a7a7efdad5',
+        'Content-Type': 'application/json',
+      },
+    baseUrl: 'https://mesto.nomoreparties.co/v1/wbf-cohort-8'
 };
 
 import autoprefixer from "autoprefixer";
-import { createCard, myID } from "./card";
-import { closePopup, openPopup, } from "./modal";
+import { myID } from "./card";
+
 import { checkResponse } from "./utils";
 
-export function getIdOfUser () {
-    return fetch(`${config.baseURL}/users/me`, {
-        headers: {
-            authorization: config.headers
-        }
-    })
-    .then(checkResponse)
-    .then((data) => {
-        return data._id
-    })
-}
-
 export function startNameOfUser() {
-    return fetch(`${config.baseURL}/users/me`, {
-        headers: {
-            authorization: config.headers
-        }
+    return fetch(`${config.baseUrl}/users/me`, {
+        headers: config.headers
     })
         .then(checkResponse)
 }
 
 export function loadStartCards() {
-    return fetch(`${config.baseURL}/cards`, {
-        headers: {
-            authorization: config.headers
-        }
+    return fetch(`${config.baseUrl}/cards`, {
+        headers: config.headers
     })
         .then(checkResponse)
 
 }
 
 export function sendNewProfile(name, bio) {
-    return fetch(`${config.baseURL}/users/me`, {
+    return fetch(`${config.baseUrl}/users/me`, {
         method: 'PATCH',
-        headers: {
-            authorization: config.headers,
-            'Content-Type': 'application/json'
-        },
+        headers: config.headers,
         body: JSON.stringify({
             name: `${name}`,
             about: `${bio}`
@@ -55,12 +39,9 @@ export function sendNewProfile(name, bio) {
 }
 
 export function sendNewCard(place, picture) {
-    return fetch(`${config.baseURL}/cards`, {
+    return fetch(`${config.baseUrl}/cards`, {
         method: 'POST',
-        headers: {
-            authorization: config.headers,
-            'Content-type': 'application/json',
-        },
+        headers: config.headers,
         body: JSON.stringify({
             name: place,
             link: picture,
@@ -73,44 +54,36 @@ export function sendNewCard(place, picture) {
 }
 
 export function removeCard(idCard) {
-    return fetch(`${config.baseURL}/cards/${idCard}`, {
+    return fetch(`${config.baseUrl}/cards/${idCard}`, {
         method: "DELETE",
-        headers: {
-            authorization: config.headers
-        }
+        headers: config.headers
     })
 }
 
 export function addLikeToCard(idCard) {
-    return fetch(`${config.baseURL}/cards/likes/${idCard}`, {
+    return fetch(`${config.baseUrl}/cards/likes/${idCard}`, {
         method: 'PUT',
-        headers: {
-            authorization: config.headers,
-            'Content-Type': 'application/json'
-        },
+        headers: config.headers,
         body: JSON.stringify({
         _id: myID
         })
     })
+    .then(checkResponse)
 }
 
 export function removeLikeOfCard(idCard) {
-    return fetch(`${config.baseURL}/cards/likes/${idCard}`, {
+    return fetch(`${config.baseUrl}/cards/likes/${idCard}`, {
         method: 'DELETE',
-        headers: {
-            authorization: config.headers
-        }
+        headers: config.headers
     })
+    .then(checkResponse)
 }
 
 
 export function sendAvatarOfUser (urlOfAvatar) {
-    return fetch(`${config.baseURL}/users/me/avatar`, {
+    return fetch(`${config.baseUrl}/users/me/avatar`, {
         method: 'PATCH',
-        headers: {
-            'Content-Type': 'application/json',
-            authorization: config.headers
-        },
+        headers: config.headers,
         body: JSON.stringify({
         avatar: urlOfAvatar
         })
@@ -120,7 +93,7 @@ export function sendAvatarOfUser (urlOfAvatar) {
 
 
 
-// fetch(`${config.baseURL}/cards`, {
+// fetch(`${config.baseUrl}/cards`, {
 //     headers: {
 //         authorization: config.headers
 //     }

@@ -13,18 +13,18 @@ function deleteCard(button) {
 function toggleButtonOfLike (number ,button, idCard) {
     if (!button.classList.contains('place__button-like_type_active')) {
         addLikeToCard(idCard)
-        .then(() => {
+        .then((data) => {
             button.classList.add('place__button-like_type_active')
-            number.textContent = parseInt(number.textContent) + 1
+            number.textContent = data.likes.length
         })
         .catch((err) => {
             console.log(`Ошибка при попытке поставить лайк: ${err.status} ${err.statusText}`)
         });
     } else {
         removeLikeOfCard(idCard)
-        .then(() => {
+        .then((data) => {
             button.classList.remove('place__button-like_type_active')
-            number.textContent = number.textContent - 1;
+            number.textContent = data.likes.length
         })
             .catch((err) => {
                 console.log(`Ошибка при попытке убрать лайк: ${err.status} ${err.statusText}`)

@@ -1,18 +1,16 @@
-import './index.css';
+import '../index.css';
 
-import { enableValidation } from "./components/validate.js";
-import {popupOpenedImage, createCard } from "./components/card.js";
-import { clickOverlay, closePopup, openPopup, closePopupKey } from "./components/modal.js";
+import { enableValidation } from "./validate.js";
+import {popupOpenedImage, createCard } from "./card.js";
+import { clickOverlay, closePopup, openPopup, closePopupKey } from "./modal.js";
 import {startNameOfUser, loadStartCards,sendNewProfile,
-     sendNewCard, sendAvatarOfUser, getIdOfUser} from "./components/api.js"
-import { renderLoading } from './components/utils';
+     sendNewCard, sendAvatarOfUser} from "./api.js"
 
 const popupEditProfile = document.querySelector('.edit-popup');
 const popupAddCard = document.querySelector('.add-popup');
 const popupEditAvatar = document.querySelector('.avatar-popup');
 
-let idOfUser = null;
-console.log(idOfUser);
+export let userId = null;
 
 const formEditPorfile = popupEditProfile.querySelector('.form');
 const formAddPlace = popupAddCard.querySelector('.form');
@@ -42,10 +40,34 @@ const avatarOfUser = document.querySelector('.profile__avatar');
 
 export const placesContainer = document.querySelector('.places');
 
+Promise.all([
+    startNameOfUser(),
+    loadStartCards()
+])
+.then(([user, cards]) => {
+    userId = user._id
+    nameOfUser.textContent = user.name;
+    bioOfUser.textContent = user.about;
+    avatarOfUser.src = user.avatar
+    cards.forEach((card) => {
+        placesContainer.prepend(createCard(card.name, card.link, card.likes.length, openPopup, userId, card._id, card.likes))
+    })
+})
+.catch(([user, cards]) => {
+    nameOfUser.textContent = `Ошибка загрузки имени:${user.status}${user.statustext}, сорян`;
+    bioOfUser.textContent = `Ошибка загрузки биографии:${user.status}${user.statustext}, сегодня без био`
+    avatarOfUser.src = 'https://thumbs.dreamstime.com/z/error-sign-error-message-icon-logo-dark-background-white-error-sign-error-message-icon-logo-dark-background-133331672.jpg'
+    console.log(cards.status)
+})
+
 avatarOfUser.addEventListener('click', () => {openPopup(popupEditAvatar)});
 buttonCloseAvatarPopup.addEventListener('click', () => {closePopup(popupEditAvatar)})
 
-buttonOpenEditPopup.addEventListener('click', () => { openPopup(popupEditProfile) });
+buttonOpenEditPopup.addEventListener('click', () => {
+     openPopup(popupEditProfile)
+     inputNameOfUser.value = nameOfUser.textContent;
+     inputBioOfUser.value = bioOfUser.textContent;
+     });
 buttonCloseEditPopup.addEventListener('click', () => { closePopup(popupEditProfile) });
 
 buttonOpenAddPopup.addEventListener('click', () => { openPopup(popupAddCard) });
@@ -54,6 +76,7 @@ buttonCloseAddPopup.addEventListener('click', () => { closePopup(popupAddCard) }
 buttonClosePopup.addEventListener('click', () => closePopup(popupOpenedImage));
 
 formEditPorfile.addEventListener('submit', () => {
+    buttonSubmitEditForm.textContent = 'Сохранение...'
     sendNewProfile(inputNameOfUser.value, inputBioOfUser.value)
     .then((data) => {
         nameOfUser.textContent = data.name;
@@ -64,26 +87,31 @@ formEditPorfile.addEventListener('submit', () => {
         inputNameOfUser.value = nameOfUser.textContent;
         inputBioOfUser.value = bioOfUser.textContent;
     })
+    .catch((err) => {
+        console.log(`Ошибка сохранения профиля:${err.status}`)
+    })
         .finally(() => {
-            buttonSubmitEditForm.textContent = 'Сохранение'
+            buttonSubmitEditForm.textContent = 'Сохранить'
         });
 })
 
 formAddPlace.addEventListener('submit', () => {
+    buttonSubmitAddForm.textContent = 'Сохранение...'
     sendNewCard(inputNameOfPlace.value, inputLinkOfPlace.value)
     .then((card) => {
-        placesContainer.append(createCard(card.name, card.link, card.likes.length, openPopup, card.owner._id, card._id, card.likes))
+        placesContainer.prepend(createCard(card.name, card.link, card.likes.length, openPopup, card.owner._id, card._id, card.likes))
         closePopup(popupAddCard)
     })
     .catch((err) => {
         console.log(`Ошибка при сохранении карточки: ${err.status}${err.statusText}`)
     })
     .finally(() => {
-        buttonSubmitAddForm.textContent = "Сохранение"
+        buttonSubmitAddForm.textContent = 'Сохранить'
     });
 })
 
 formEditAvatar.addEventListener('submit', () => {
+    buttonSubmitAvatarForm.textContent = 'Сохранение...'
     sendAvatarOfUser(inputLinkOfAvatar.value)
     .then((data) => {
         avatarOfUser.src = data.avatar;
@@ -93,34 +121,16 @@ formEditAvatar.addEventListener('submit', () => {
         console.log(`Ошибка при поптыке изменить аватар: ${err.status} ${err.statusText}`)
     })
     .finally(() => {
-        renderLoading(true, buttonSubmitAvatarForm)
+        buttonSubmitAvatarForm.textContent = 'Сохранить'
     });
 })
 
-closePopupKey(closePopup)
 clickOverlay(closePopup);
-
-
-
-enableValidation()
-
-
-
-Promise.all([
-    startNameOfUser(),
-    loadStartCards()
-])
-.then(([user, cards]) => {
-    nameOfUser.textContent = user.name;
-    bioOfUser.textContent = user.about;
-    avatarOfUser.src = user.avatar
-    cards.forEach((card) => {
-        placesContainer.prepend(createCard(card.name, card.link, card.likes.length, openPopup, card.owner._id, card._id, card.likes))
-    })
-})
-.catch(([user, cards]) => {
-    nameOfUser.textContent = `Ошибка загрузки имени:${user.status}${user.statustext}, сорян`;
-    bioOfUser.textContent = `Ошибка загрузки биографии:${user.status}${user.statustext}, сегодня без био`
-    avatarOfUser.src = 'https://thumbs.dreamstime.com/z/error-sign-error-message-icon-logo-dark-background-white-error-sign-error-message-icon-logo-dark-background-133331672.jpg'
-    console.log(cards.status)
+enableValidation({
+    formSelector: '.form',
+    inputSelector: '.form__input',
+    submitButtonSelector: '.form__button-submit',
+    inactiveButtonClass: 'form__button-submit_disabled',
+    inactieErrorClass: 'form__input_type_error',
+    errorClass: 'form__error_active',
 })

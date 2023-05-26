@@ -11,18 +11,19 @@ export function clickOverlay(closePopup) {
     })
 }
 
-export function closePopupKey() {
-    document.addEventListener('keydown', (evt) => {
-        if (evt.key === 'Escape' && document.querySelector('.popup_active')) {
-            closePopup(document.querySelector('.popup_active'))
-        }
-    })
+export function closePopupKey(evt) {
+    if (evt.key === 'Escape') {
+        const openedPopup = document.querySelector('.popup_active');
+        closePopup(openedPopup)
+    }
 }
 
 export function openPopup(popup) {
     popup.classList.add('popup_active');
+    document.addEventListener('keydown', closePopupKey)
 }
 
 export function closePopup(popup) {
     popup.classList.remove('popup_active')
+    document.removeEventListener('keydown', closePopupKey)
 }
