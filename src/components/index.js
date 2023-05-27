@@ -48,13 +48,13 @@ Promise.all([
 ])
     .then(([user, cards]) => {
         userId = user._id
+        localStorage.setItem('userId', userId)
         nameOfUser.textContent = user.name;
         bioOfUser.textContent = user.about;
         avatarOfUser.src = user.avatar
         cards.forEach((card) => {
             placesContainer.prepend(createCard(card.name, card.link, card.likes.length, openPopup, userId, card._id, card.likes))
         })
-       return userId
     })
     .catch(([user, cards]) => {
         nameOfUser.textContent = `Ошибка загрузки имени:${user.status}${user.statustext}, сорян`;
@@ -62,8 +62,6 @@ Promise.all([
         avatarOfUser.src = 'https://thumbs.dreamstime.com/z/error-sign-error-message-icon-logo-dark-background-white-error-sign-error-message-icon-logo-dark-background-133331672.jpg'
         console.log(cards.status)
     })
-
-export {userId}
 
 avatarOfUser.addEventListener('click', () => { openPopup(popupEditAvatar) });
 buttonCloseAvatarPopup.addEventListener('click', () => { closePopup(popupEditAvatar) })
