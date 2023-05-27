@@ -33,7 +33,7 @@
 .place__info{align-items:center;display:flex;justify-content:space-between}
 .place__title{font-size:24px;font-weight:900;line-height:29px;margin:25px auto 32px 21px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .place__like{align-items:center;display:flex;flex-direction:column;margin:auto 20px auto auto}
-.place__button-like{background-color:transparent;background-image:url(87ed371465c7a6a1cd01.svg);background-position:50%;background-size:cover;border:none;height:19px;margin:0;min-width:22px}
+.place__button-like{background-color:transparent;background-image:url(87ed371465c7a6a1cd01.svg);background-position:50%;background-size:cover;border:none;height:19px;margin:0;min-width:22px}@media (max-width:500){.place__button-like{min-height:14px;min-width:15px}}
 .place__like-number{font-size:13px;font-weight:400;line-height:16px;margin:6px 0 0}
 .place__button-like_type_active{background-image:url(35948469632d0421d697.svg)}
 .place__trash{height:19px;position:absolute;right:20px;top:20px;width:18px}
