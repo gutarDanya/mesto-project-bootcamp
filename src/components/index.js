@@ -53,7 +53,7 @@ Promise.all([
         bioOfUser.textContent = user.about;
         avatarOfUser.src = user.avatar
         cards.forEach((card) => {
-            placesContainer.prepend(createCard(card.name, card.link, card.likes.length, openPopup, userId, card._id, card.likes))
+            placesContainer.prepend(createCard(card.name, card.link, card.likes.length, openPopup, card.owner._id, card._id, card.likes))
         })
     })
     .catch(([user, cards]) => {
