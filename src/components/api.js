@@ -7,7 +7,7 @@ const config = {
 };
 
 import autoprefixer from "autoprefixer";
-import { myID } from "./card";
+import { userId } from ".";
 
 import { checkResponse } from "./utils";
 
@@ -46,7 +46,7 @@ export function sendNewCard(place, picture) {
             name: place,
             link: picture,
             owner: {
-                id: myID
+                id: userId
             }
         })
     })
@@ -65,7 +65,7 @@ export function addLikeToCard(idCard) {
         method: 'PUT',
         headers: config.headers,
         body: JSON.stringify({
-            _id: myID
+            _id: userId
         })
     })
         .then(checkResponse)

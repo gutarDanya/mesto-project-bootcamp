@@ -12,7 +12,7 @@ const popupEditProfile = document.querySelector('.edit-popup');
 const popupAddCard = document.querySelector('.add-popup');
 const popupEditAvatar = document.querySelector('.avatar-popup');
 
-export let userId = null;
+let userId = null;
 
 const formEditPorfile = popupEditProfile.querySelector('.form');
 const formAddPlace = popupAddCard.querySelector('.form');
@@ -54,7 +54,7 @@ Promise.all([
         cards.forEach((card) => {
             placesContainer.prepend(createCard(card.name, card.link, card.likes.length, openPopup, userId, card._id, card.likes))
         })
-        return userId
+       return userId
     })
     .catch(([user, cards]) => {
         nameOfUser.textContent = `Ошибка загрузки имени:${user.status}${user.statustext}, сорян`;
@@ -62,6 +62,8 @@ Promise.all([
         avatarOfUser.src = 'https://thumbs.dreamstime.com/z/error-sign-error-message-icon-logo-dark-background-white-error-sign-error-message-icon-logo-dark-background-133331672.jpg'
         console.log(cards.status)
     })
+
+export {userId}
 
 avatarOfUser.addEventListener('click', () => { openPopup(popupEditAvatar) });
 buttonCloseAvatarPopup.addEventListener('click', () => { closePopup(popupEditAvatar) })

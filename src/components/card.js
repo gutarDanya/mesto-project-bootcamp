@@ -2,7 +2,8 @@ export const popupOpenedImage = document.querySelector('.image-popup');
 const imageElement = popupOpenedImage.querySelector('.popup__image');
 const textElement = popupOpenedImage.querySelector('.popup__figaption');
 let nameOfUser = document.querySelector('.profile__title');
-export const myID = '0372648f2abad853d6418be6'
+
+import { userId } from ".";
 
 import { removeCard, addLikeToCard, removeLikeOfCard } from "./api";
 
@@ -43,7 +44,7 @@ function openImage(image, name, openPopup) {
 
 function checkLike(arr, likebutton) {
     if (arr.some((likes) => {
-        return likes._id === myID
+        return likes._id === userId
     }
     )) {
         likebutton.classList.add('place__button-like_type_active')
@@ -68,7 +69,7 @@ export function createCard(placeName, placeUrl, likes, openPopup, idOfUser, idOf
 
     buttonDeleteCard.addEventListener('click', () => { removeCard(idOfCard) })
 
-    if (idOfUser !== myID) {
+    if (idOfUser !== userId) {
         buttonDeleteCard.remove()
     }
 
