@@ -68,7 +68,11 @@ export function createCard(placeName, placeUrl, likes, openPopup, idOfUser, idOf
          removeCard(idOfCard)
         .then(() => {
             deleteCard(buttonDeleteCard)
-        }) })
+        })
+        .catch((err) => {
+            console.log(`Ошибка:${err.status}`)
+        })
+     });
 
     if (idOfUser !== localStorage.getItem('userId')) {
         buttonDeleteCard.remove()

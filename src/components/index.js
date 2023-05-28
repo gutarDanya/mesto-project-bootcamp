@@ -2,7 +2,7 @@ import '../index.css';
 
 import { enableValidation } from "./validate.js";
 import { popupOpenedImage, createCard } from "./card.js";
-import { clickOverlay, closePopup, openPopup, closePopupKey } from "./modal.js";
+import { clickOverlay, closePopup, openPopup} from "./modal.js";
 import {
     startNameOfUser, loadStartCards, sendNewProfile,
     sendNewCard, sendAvatarOfUser
