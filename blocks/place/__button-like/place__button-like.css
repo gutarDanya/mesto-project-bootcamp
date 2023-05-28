@@ -9,7 +9,7 @@
     background-color: rgba(0, 0, 0, 0);
 }
 
-@media (max-width: 500px) {
+@media (max-width:500px) {
     .place__button-like{
         min-width:15px;
         min-height:14px;
