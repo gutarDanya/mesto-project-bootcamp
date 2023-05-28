@@ -1,9 +1,9 @@
 export const popupOpenedImage = document.querySelector('.image-popup');
 const imageElement = popupOpenedImage.querySelector('.popup__image');
 const textElement = popupOpenedImage.querySelector('.popup__figaption');
-let nameOfUser = document.querySelector('.profile__title');
 
 import { removeCard, addLikeToCard, removeLikeOfCard } from "./api";
+import { nameOfUser } from ".";
 
 function deleteCard(button) {
     button.closest('.place').remove();
@@ -32,11 +32,11 @@ function toggleButtonOfLike(number, button, idCard) {
 
 }
 
-function openImage(image, name, openPopup) {
+function openImage(image, namePlace, openPopup) {
 
     imageElement.src = image.src;
-    imageElement.alt = name.textContent;
-    textElement.textContent = name.textContent;
+    imageElement.alt = namePlace.textContent;
+    textElement.textContent = namePlace.textContent;
     openPopup(popupOpenedImage);
 }
 
@@ -60,12 +60,15 @@ export function createCard(placeName, placeUrl, likes, openPopup, idOfUser, idOf
     const likeOfCard = cardAddInProfile.querySelector('.place__button-like');
     const buttonDeleteCard = cardAddInProfile.querySelector('.place__trash');
     const numberlikeOfCard = cardAddInProfile.querySelector('.place__like-number')
-    imageOfCard.addEventListener('click', () => { openImage(imageOfCard, nameOfUser, openPopup) });
-    buttonDeleteCard.addEventListener('click', () => { deleteCard(buttonDeleteCard) });
+    imageOfCard.addEventListener('click', () => { openImage(imageOfCard, nameOfPlace, openPopup) });
     likeOfCard.addEventListener('click', () => { toggleButtonOfLike(numberlikeOfCard, likeOfCard, idOfCard) });
     checkLike(like, likeOfCard)
 
-    buttonDeleteCard.addEventListener('click', () => { removeCard(idOfCard) })
+    buttonDeleteCard.addEventListener('click', () => {
+         removeCard(idOfCard)
+        .then(() => {
+            deleteCard(buttonDeleteCard)
+        }) })
 
     if (idOfUser !== localStorage.getItem('userId')) {
         buttonDeleteCard.remove()

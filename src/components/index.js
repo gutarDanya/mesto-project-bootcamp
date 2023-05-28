@@ -36,7 +36,7 @@ const inputNameOfPlace = popupAddCard.querySelector('#place');
 const inputLinkOfPlace = popupAddCard.querySelector('#link');
 const inputLinkOfAvatar = popupEditAvatar.querySelector('#avatar');
 
-const nameOfUser = document.querySelector('.profile__title');
+export const nameOfUser = document.querySelector('.profile__title');
 const bioOfUser = document.querySelector('.profile__bio');
 const avatarOfUser = document.querySelector('.profile__avatar');
 
@@ -86,9 +86,6 @@ formEditPorfile.addEventListener('submit', () => {
             bioOfUser.textContent = data.about;
 
             closePopup(popupEditProfile);
-
-            inputNameOfUser.value = nameOfUser.textContent;
-            inputBioOfUser.value = bioOfUser.textContent;
         })
         .catch((err) => {
             console.log(`Ошибка сохранения профиля:${err.status}`)
@@ -103,6 +100,10 @@ formAddPlace.addEventListener('submit', () => {
     sendNewCard(inputNameOfPlace.value, inputLinkOfPlace.value)
         .then((card) => {
             placesContainer.prepend(createCard(card.name, card.link, card.likes.length, openPopup, card.owner._id, card._id, card.likes))
+            inputNameOfPlace.value = '';
+            inputLinkOfPlace.value = '';
+            buttonSubmitAddForm.setAttribute('disabled', true);
+            buttonSubmitAddForm.classList.add('form__button-submit_disabled');
             closePopup(popupAddCard)
         })
         .catch((err) => {
@@ -118,6 +119,9 @@ formEditAvatar.addEventListener('submit', () => {
     sendAvatarOfUser(inputLinkOfAvatar.value)
         .then((data) => {
             avatarOfUser.src = data.avatar;
+            inputLinkOfAvatar.value = '';
+            buttonSubmitAvatarForm.setAttribute('disabled', true);
+            buttonSubmitAvatarForm.classList.add('form__button-submit_disabled')
             closePopup(popupEditAvatar)
         })
         .catch((err) => {
